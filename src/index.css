@@ -162,8 +162,8 @@
   --cursed-gradient-1:      #ff4e00;
   --cursed-gradient-2:      #4415b4;
   --cursed-gradient-3:      #7b3fe4;
-  --cursed-font-display:    'Sora', sans-serif;
-  --cursed-font-body:       'Sora', sans-serif;
+  --cursed-font-display:    'Aoboshi One', serif;
+  --cursed-font-body:       'Aoboshi One', serif;
   --cursed-font-mono:       'JetBrains Mono', monospace;
   --cursed-glow:            0 0 40px rgba(255, 78, 0, 0.12), 0 0 80px rgba(68, 21, 180, 0.08);
   --cursed-shadow:          0 4px 24px rgba(0, 0, 0, 0.5);
@@ -220,8 +220,8 @@
   --cursed-gradient-1:      #2b3a8e;
   --cursed-gradient-2:      #c44aef;
   --cursed-gradient-3:      #f56e4a;
-  --cursed-font-display:    'DM Sans', sans-serif;
-  --cursed-font-body:       'DM Sans', sans-serif;
+  --cursed-font-display:    'Google Sans', sans-serif;
+  --cursed-font-body:       'Google Sans', sans-serif;
   --cursed-font-mono:       'JetBrains Mono', monospace;
   --cursed-glow:            0 0 40px rgba(196, 74, 239, 0.10), 0 0 80px rgba(77, 108, 250, 0.06);
   --cursed-shadow:          0 4px 24px rgba(0, 0, 0, 0.6);
