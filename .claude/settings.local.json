@@ -3,7 +3,11 @@
     "allow": [
       "WebFetch(domain:spell.sh)",
       "WebFetch(domain:fonts.google.com)",
-      "WebFetch(domain:fonts.googleapis.com)"
+      "WebFetch(domain:fonts.googleapis.com)",
+      "Skill(update-config)",
+      "mcp__storybook__get-storybook-story-instructions",
+      "mcp__storybook__run-story-tests",
+      "mcp__storybook__preview-stories"
     ]
   }
 }
