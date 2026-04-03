@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch(domain:spell.sh)"
+      "WebFetch(domain:spell.sh)",
+      "WebFetch(domain:fonts.google.com)",
+      "WebFetch(domain:fonts.googleapis.com)"
     ]
   }
 }
