@@ -1,0 +1,280 @@
+================================================================================
+CURSED UI — Design System Progress Tracker
+================================================================================
+Last updated: 2026-04-02
+Status: PLANNING COMPLETE — Ready to build
+
+================================================================================
+1. PROJECT OVERVIEW
+================================================================================
+
+Cursed UI is a digital-occult design system built on top of Spell UI (spell.sh)
+primitives, showcased in a Storybook 10 environment. The aesthetic is meditative,
+ritual, and cosmic-weird — inspired by the fun side of Dandadan anime. Think
+floating gradient orbs, terminal text with sigil shimmer, slow blur reveals,
+and deep dark palettes.
+
+The repo ("cursed-storybook") currently contains default Storybook scaffolding
+(Button, Header, Page) with React 19, Vite, TypeScript, and shadcn as a
+dev dependency. No Tailwind CSS is installed yet.
+
+================================================================================
+2. REFERENCE IMAGES
+================================================================================
+
+Three branding sheets live in the repo root:
+
+  Yerkir Branding.jpg
+  - Font pairing: Akira Expanded (display) + HK Grotesk (body)
+  - Palette: Deep navy #111319, sunset orange #DE4A2E, periwinkle #C1BFE3,
+    light #E1E1E3, yellow #E04C2E, blue #2636B6
+  - Mood: Futuristic real estate, gradient sunset imagery
+
+  Nohemi Branding.jpg
+  - Font: Nohemi (all weights — ExtraLight through Bold)
+  - Palette: Black #000000, Off-white #E3E3E1, Orange #FF4E00,
+    Indigo/Roxo #4415B4, Orange-to-purple gradient
+  - Mood: Modern grotesque, high contrast, editorial
+
+  Soun Branding.jpg
+  - Font: Google Sans
+  - Palette: Dark charcoal #033239, white, vivid blue-to-orange gradient,
+    coral #F95738, blue #3772FF
+  - Mood: Music/sound branding, cosmic, gradient-heavy
+
+================================================================================
+3. DESIGN DECISIONS (from grill-me session)
+================================================================================
+
+  Aesthetic:        Digital occult — spooky + meditative, not horror.
+                    Floating gradients, terminal text, sigil shimmer.
+                    Dandadan-inspired cosmic weirdness.
+
+  Spell UI:         https://spell.sh/ — copy-paste React component library
+                    using Tailwind CSS. Install via shadcn CLI.
+
+  Install method:   Add pnpm, use `pnpm dlx shadcn@latest add @spell/...`
+
+  Tailwind:         Install Tailwind CSS v4 (new)
+
+  Three themes:     Named Yerkir / Nohemi / Soun (1:1 from branding sheets)
+
+  Theme mechanism:  CSS data-attribute on root element
+                    `data-theme="yerkir|nohemi|soun"`
+                    Tokens switch via CSS selectors — no JS re-render
+
+  Font sourcing:    Use closest free alternatives where originals aren't free:
+                    - Akira Expanded  -> Orbitron or Audiowide (Google Fonts)
+                    - HK Grotesk      -> Space Grotesk (Google Fonts)
+                    - Nohemi           -> Nohemi (free, self-host)
+                    - Google Sans      -> DM Sans (Google Fonts)
+
+  Animation vibe:   Meditative / slow-floating — gentle drifting gradients,
+                    slow blur reveals, ritual energy
+
+  Storybook toggle: Toolbar button switching all three themes globally
+
+  WebGL fallback:   No fallback — debug until AnimatedGradient and LightRays
+                    work correctly in Storybook iframe
+
+  Missing inputs:   Use shadcn/ui primitives (Select, Textarea) restyled
+                    with Cursed UI tokens
+
+  Packaging:        Storybook-only for now — everything lives in src/
+
+================================================================================
+4. SPELL UI COMPONENTS TO INTEGRATE
+================================================================================
+
+  AnimatedGradient  — WebGL gradient backgrounds, themed per-palette
+                      Presets: Lava, Prism, Plasma, Pulse, Vortex, Mist
+                      Custom mode: color1/color2/color3 + speed/distortion/swirl
+                      Install: pnpm dlx shadcn@latest add @spell/animated-gradient
+
+  LightRays         — WebGL light ray backgrounds
+                      Props: intensity, rays, reach, position, raysColor, animation
+                      Install: pnpm dlx shadcn@latest add @spell/light-rays
+
+  BlurReveal        — Staggered blur-reveal text animation
+                      Props: speedReveal, speedSegment, delay, trigger, inView
+                      Uses motion/react (Framer Motion)
+                      Install: pnpm dlx shadcn@latest add @spell/blur-reveal
+
+  ShimmerText       — Animated shimmer highlight on text
+                      Props: variant, duration, delay, spread
+                      Uses motion/react
+                      Install: pnpm dlx shadcn@latest add @spell/shimmer-text
+
+  SlideUpText       — Slide-up text entrance, split by words/chars/lines
+                      Props: split, from, stagger, delay, transition, inView
+                      Install: pnpm dlx shadcn@latest add @spell/slide-up-text
+
+  FlowButton        — Animated flowing dashed border on hover
+                      Props: size (sm/default/lg), borderColor, asChild
+                      Install: pnpm dlx shadcn@latest add @spell/flow-button
+
+  AnimatedCheckbox  — Spell UI checkbox with animation
+                      Install: pnpm dlx shadcn@latest add @spell/animated-checkbox
+
+  LabelInput        — Spell UI floating-label input
+                      Install: pnpm dlx shadcn@latest add @spell/label-input
+
+  ExplodingInput    — Spell UI input with explosive feedback
+                      Install: pnpm dlx shadcn@latest add @spell/exploding-input
+
+================================================================================
+5. COMPONENT SCOPE
+================================================================================
+
+  A. Design Tokens (CSS custom properties per theme)
+     - Color primitives (bg, fg, primary, secondary, accent, destructive, muted)
+     - Typography scale (font-family, font-size, font-weight, line-height, letter-spacing)
+     - Spacing (if needed)
+     - Border radius, shadows
+
+  B. Typography System
+     - H1, H2, H3, H4 headings (display font per theme)
+     - Body, Caption, Label (body font per theme)
+     - Each with BlurReveal or ShimmerText animation options
+
+  C. Buttons
+     - Primary (FlowButton wrapper, themed border + bg)
+     - Secondary (outline variant)
+     - Ghost (transparent, hover state)
+     - Destructive (red/error variant)
+
+  D. Form Inputs
+     - Input (Spell UI LabelInput + ExplodingInput, themed)
+     - Textarea (shadcn/ui, restyled with Cursed tokens)
+     - Checkbox (Spell UI AnimatedCheckbox, themed)
+     - Select (shadcn/ui, restyled with Cursed tokens)
+
+  E. Background Effects
+     - AnimatedGradient (themed per palette, meditative speed)
+     - LightRays (themed ray colors, atmospheric)
+
+  F. Storybook Documentation Stories
+     - Introduction / overview
+     - Color Tokens (visual swatches)
+     - Typography (specimen display)
+     - Animation Showcase
+
+================================================================================
+6. PLANNED TASKS (in order)
+================================================================================
+
+  Phase 1: Foundation
+  [ ] Install Tailwind CSS v4 + PostCSS + autoprefixer
+  [ ] Configure Tailwind for the project (tailwind.config, postcss.config)
+  [ ] Add pnpm to the project
+  [ ] Initialize shadcn/ui (components.json, utils, cn helper)
+  [ ] Install Spell UI components via shadcn CLI
+  [ ] Install motion/react (Framer Motion) — dependency for Spell UI text anims
+
+  Phase 2: Design Tokens & Theming
+  [ ] Create CSS custom properties file with all three theme token sets
+  [ ] Set up data-theme attribute switching mechanism
+  [ ] Add font imports (Google Fonts for Orbitron/Space Grotesk/DM Sans,
+      self-host Nohemi)
+  [ ] Create Tailwind theme extension mapping tokens to utilities
+
+  Phase 3: Storybook Configuration
+  [ ] Create Storybook toolbar addon for theme switching
+  [ ] Configure Storybook preview.ts with theme decorator
+  [ ] Ensure WebGL works in Storybook iframe (test AnimatedGradient + LightRays)
+
+  Phase 4: Core Components
+  [ ] Typography components (Heading, Text, Caption, Label)
+  [ ] Button variants (Primary, Secondary, Ghost, Destructive)
+  [ ] Form inputs (Input, Textarea, Checkbox, Select)
+  [ ] Background components (themed AnimatedGradient, themed LightRays)
+
+  Phase 5: Stories & Documentation
+  [ ] Introduction story (overview of Cursed UI)
+  [ ] Color Tokens story (visual swatches per theme)
+  [ ] Typography story (specimen with all weights/sizes)
+  [ ] Button story (all variants × themes)
+  [ ] Form Inputs story (all input types × themes)
+  [ ] Animation Showcase story (all Spell UI animations themed)
+
+  Phase 6: Polish
+  [ ] Verify all three themes render correctly
+  [ ] Test theme switching is smooth
+  [ ] Ensure animations are meditative pace across all themes
+  [ ] Final visual QA pass
+
+================================================================================
+7. POTENTIAL BLOCKERS
+================================================================================
+
+  1. WebGL in Storybook iframe
+     Storybook renders stories in an iframe with a sandbox attribute. WebGL
+     contexts may be blocked or limited. AnimatedGradient and LightRays both
+     use WebGL shaders. Decision: debug until working, no fallback.
+     Mitigation: May need to adjust Storybook's iframe sandbox settings or
+     configure `allow-scripts allow-same-origin` explicitly.
+
+  2. Spell UI + Tailwind v4 compatibility
+     Spell UI components were likely built against Tailwind v3. Tailwind v4
+     has a new engine and config format. Some class names or theme() references
+     may need adjustment.
+     Mitigation: Test each component after install, patch as needed.
+
+  3. Font availability (Nohemi)
+     Nohemi is free but not on Google Fonts — needs self-hosting. Must find
+     and download .woff2 files.
+     Mitigation: Source from the Nohemi font project or a CDN that hosts it.
+
+  4. shadcn CLI initialization
+     The shadcn CLI expects specific project structure (tsconfig paths,
+     components alias). Current repo may not have all aliases configured.
+     Mitigation: Set up proper path aliases in tsconfig.json and vite.config.ts
+     before running shadcn init.
+
+  5. Akira Expanded substitute
+     Finding a free font that captures Akira Expanded's wide, futuristic
+     character. Orbitron and Audiowide are close but not identical.
+     Mitigation: Accept the closest match — this is acknowledged as an
+     approximation.
+
+  6. motion/react version
+     Spell UI text animations use motion/react (the new Framer Motion package
+     name). Need to ensure we install the correct version that matches Spell
+     UI's expectations.
+     Mitigation: Check Spell UI's peer dependencies during install.
+
+================================================================================
+8. FILE STRUCTURE (planned)
+================================================================================
+
+  src/
+    styles/
+      cursed-tokens.css          — CSS custom properties for all three themes
+      fonts.css                  — @font-face declarations + Google Fonts imports
+    components/
+      ui/                        — shadcn/ui primitives (Select, Textarea, etc.)
+      spell/                     — Spell UI components (scaffolded by CLI)
+      cursed/                    — Cursed UI design system components
+        CursedButton.tsx
+        CursedInput.tsx
+        CursedTextarea.tsx
+        CursedCheckbox.tsx
+        CursedSelect.tsx
+        CursedHeading.tsx
+        CursedText.tsx
+        CursedBackground.tsx
+    stories/
+      cursed/
+        Introduction.mdx
+        ColorTokens.stories.tsx
+        Typography.stories.tsx
+        Button.stories.tsx
+        FormInputs.stories.tsx
+        AnimationShowcase.stories.tsx
+  .storybook/
+    preview.ts                   — theme decorator + font loading
+    manager.ts                   — toolbar theme toggle addon
+
+================================================================================
+END OF PROGRESS FILE
+================================================================================

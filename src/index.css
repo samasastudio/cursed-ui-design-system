@@ -1,0 +1,430 @@
+@import "tailwindcss";
+
+/* ============================================================================
+   CURSED UI — Digital Occult Design System
+   Three themes: Yerkir (sunset ritual), Nohemi (neon grimoire), Soun (cosmic pulse)
+   ============================================================================ */
+
+/* --- Font Imports --- */
+
+/* Yerkir theme: Audiowide (display) + Space Grotesk (body) */
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+/* Nohemi: self-hosted via fontsource or CDN — using Sora as closest free match */
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;500;600;700;800&display=swap');
+
+/* Soun theme: DM Sans */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
+/* Monospace for terminal text across all themes */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/geist";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ============================================================================
+   THEME TOKENS via data-theme attribute
+   ============================================================================ */
+
+/* --- YERKIR: Sunset Ritual --- */
+[data-theme="yerkir"] {
+  /* Palette */
+  --cursed-bg:              #0b0d11;
+  --cursed-bg-elevated:     #111419;
+  --cursed-bg-surface:      #1a1d25;
+  --cursed-bg-overlay:      rgba(11, 13, 17, 0.85);
+  --cursed-fg:              #e1e1e3;
+  --cursed-fg-muted:        #8a8d96;
+  --cursed-fg-faint:        #4a4d56;
+  --cursed-primary:         #de4a2e;
+  --cursed-primary-hover:   #f25a3e;
+  --cursed-primary-muted:   rgba(222, 74, 46, 0.15);
+  --cursed-secondary:       #2636b6;
+  --cursed-secondary-hover: #3a4bd4;
+  --cursed-accent:          #c1bfe3;
+  --cursed-accent-muted:    rgba(193, 191, 227, 0.12);
+  --cursed-destructive:     #ff3b3b;
+  --cursed-border:          rgba(193, 191, 227, 0.1);
+  --cursed-border-hover:    rgba(193, 191, 227, 0.2);
+  --cursed-ring:            rgba(222, 74, 46, 0.4);
+
+  /* Gradient stops */
+  --cursed-gradient-1:      #111319;
+  --cursed-gradient-2:      #de4a2e;
+  --cursed-gradient-3:      #c1bfe3;
+
+  /* Fonts */
+  --cursed-font-display:    'Audiowide', cursive;
+  --cursed-font-body:       'Space Grotesk', sans-serif;
+  --cursed-font-mono:       'JetBrains Mono', monospace;
+
+  /* Shadows */
+  --cursed-glow:            0 0 40px rgba(222, 74, 46, 0.15), 0 0 80px rgba(222, 74, 46, 0.05);
+  --cursed-shadow:          0 4px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* --- NOHEMI: Neon Grimoire --- */
+[data-theme="nohemi"] {
+  /* Palette */
+  --cursed-bg:              #050505;
+  --cursed-bg-elevated:     #0d0d0d;
+  --cursed-bg-surface:      #161616;
+  --cursed-bg-overlay:      rgba(5, 5, 5, 0.88);
+  --cursed-fg:              #e3e3e1;
+  --cursed-fg-muted:        #8a8a88;
+  --cursed-fg-faint:        #4a4a48;
+  --cursed-primary:         #ff4e00;
+  --cursed-primary-hover:   #ff6a2a;
+  --cursed-primary-muted:   rgba(255, 78, 0, 0.12);
+  --cursed-secondary:       #4415b4;
+  --cursed-secondary-hover: #5a2ed0;
+  --cursed-accent:          #7b3fe4;
+  --cursed-accent-muted:    rgba(123, 63, 228, 0.12);
+  --cursed-destructive:     #ff2d2d;
+  --cursed-border:          rgba(227, 227, 225, 0.08);
+  --cursed-border-hover:    rgba(227, 227, 225, 0.16);
+  --cursed-ring:            rgba(255, 78, 0, 0.4);
+
+  /* Gradient stops */
+  --cursed-gradient-1:      #ff4e00;
+  --cursed-gradient-2:      #4415b4;
+  --cursed-gradient-3:      #7b3fe4;
+
+  /* Fonts */
+  --cursed-font-display:    'Sora', sans-serif;
+  --cursed-font-body:       'Sora', sans-serif;
+  --cursed-font-mono:       'JetBrains Mono', monospace;
+
+  /* Shadows */
+  --cursed-glow:            0 0 40px rgba(255, 78, 0, 0.12), 0 0 80px rgba(68, 21, 180, 0.08);
+  --cursed-shadow:          0 4px 24px rgba(0, 0, 0, 0.5);
+}
+
+/* --- SOUN: Cosmic Pulse --- */
+[data-theme="soun"] {
+  /* Palette */
+  --cursed-bg:              #021b20;
+  --cursed-bg-elevated:     #033239;
+  --cursed-bg-surface:      #064550;
+  --cursed-bg-overlay:      rgba(2, 27, 32, 0.88);
+  --cursed-fg:              #e8edef;
+  --cursed-fg-muted:        #7a9ba3;
+  --cursed-fg-faint:        #3d6068;
+  --cursed-primary:         #3772ff;
+  --cursed-primary-hover:   #5088ff;
+  --cursed-primary-muted:   rgba(55, 114, 255, 0.12);
+  --cursed-secondary:       #f95738;
+  --cursed-secondary-hover: #ff7058;
+  --cursed-accent:          #00d4aa;
+  --cursed-accent-muted:    rgba(0, 212, 170, 0.1);
+  --cursed-destructive:     #f95738;
+  --cursed-border:          rgba(232, 237, 239, 0.08);
+  --cursed-border-hover:    rgba(232, 237, 239, 0.18);
+  --cursed-ring:            rgba(55, 114, 255, 0.4);
+
+  /* Gradient stops */
+  --cursed-gradient-1:      #3772ff;
+  --cursed-gradient-2:      #f95738;
+  --cursed-gradient-3:      #00d4aa;
+
+  /* Fonts */
+  --cursed-font-display:    'DM Sans', sans-serif;
+  --cursed-font-body:       'DM Sans', sans-serif;
+  --cursed-font-mono:       'JetBrains Mono', monospace;
+
+  /* Shadows */
+  --cursed-glow:            0 0 40px rgba(55, 114, 255, 0.12), 0 0 80px rgba(249, 87, 56, 0.06);
+  --cursed-shadow:          0 4px 24px rgba(0, 0, 0, 0.5);
+}
+
+/* ============================================================================
+   DEFAULT THEME (Yerkir)
+   ============================================================================ */
+:root {
+  --cursed-bg:              #0b0d11;
+  --cursed-bg-elevated:     #111419;
+  --cursed-bg-surface:      #1a1d25;
+  --cursed-bg-overlay:      rgba(11, 13, 17, 0.85);
+  --cursed-fg:              #e1e1e3;
+  --cursed-fg-muted:        #8a8d96;
+  --cursed-fg-faint:        #4a4d56;
+  --cursed-primary:         #de4a2e;
+  --cursed-primary-hover:   #f25a3e;
+  --cursed-primary-muted:   rgba(222, 74, 46, 0.15);
+  --cursed-secondary:       #2636b6;
+  --cursed-secondary-hover: #3a4bd4;
+  --cursed-accent:          #c1bfe3;
+  --cursed-accent-muted:    rgba(193, 191, 227, 0.12);
+  --cursed-destructive:     #ff3b3b;
+  --cursed-border:          rgba(193, 191, 227, 0.1);
+  --cursed-border-hover:    rgba(193, 191, 227, 0.2);
+  --cursed-ring:            rgba(222, 74, 46, 0.4);
+  --cursed-gradient-1:      #111319;
+  --cursed-gradient-2:      #de4a2e;
+  --cursed-gradient-3:      #c1bfe3;
+  --cursed-font-display:    'Audiowide', cursive;
+  --cursed-font-body:       'Space Grotesk', sans-serif;
+  --cursed-font-mono:       'JetBrains Mono', monospace;
+  --cursed-glow:            0 0 40px rgba(222, 74, 46, 0.15), 0 0 80px rgba(222, 74, 46, 0.05);
+  --cursed-shadow:          0 4px 24px rgba(0, 0, 0, 0.4);
+  --background:              oklch(1 0 0);
+  --foreground:              oklch(0.145 0 0);
+  --card:              oklch(1 0 0);
+  --card-foreground:              oklch(0.145 0 0);
+  --popover:              oklch(1 0 0);
+  --popover-foreground:              oklch(0.145 0 0);
+  --primary:              oklch(0.205 0 0);
+  --primary-foreground:              oklch(0.985 0 0);
+  --secondary:              oklch(0.97 0 0);
+  --secondary-foreground:              oklch(0.205 0 0);
+  --muted:              oklch(0.97 0 0);
+  --muted-foreground:              oklch(0.556 0 0);
+  --accent:              oklch(0.97 0 0);
+  --accent-foreground:              oklch(0.205 0 0);
+  --destructive:              oklch(0.577 0.245 27.325);
+  --border:              oklch(0.922 0 0);
+  --input:              oklch(0.922 0 0);
+  --ring:              oklch(0.708 0 0);
+  --chart-1:              oklch(0.87 0 0);
+  --chart-2:              oklch(0.556 0 0);
+  --chart-3:              oklch(0.439 0 0);
+  --chart-4:              oklch(0.371 0 0);
+  --chart-5:              oklch(0.269 0 0);
+  --radius:              0.625rem;
+  --sidebar:              oklch(0.985 0 0);
+  --sidebar-foreground:              oklch(0.145 0 0);
+  --sidebar-primary:              oklch(0.205 0 0);
+  --sidebar-primary-foreground:              oklch(0.985 0 0);
+  --sidebar-accent:              oklch(0.97 0 0);
+  --sidebar-accent-foreground:              oklch(0.205 0 0);
+  --sidebar-border:              oklch(0.922 0 0);
+  --sidebar-ring:              oklch(0.708 0 0);
+}
+
+/* ============================================================================
+   TYPOGRAPHY SCALE
+   ============================================================================ */
+
+@theme {
+  --font-display: var(--cursed-font-display);
+  --font-body: var(--cursed-font-body);
+  --font-mono: var(--cursed-font-mono);
+
+  --color-cursed-bg: var(--cursed-bg);
+  --color-cursed-bg-elevated: var(--cursed-bg-elevated);
+  --color-cursed-bg-surface: var(--cursed-bg-surface);
+  --color-cursed-fg: var(--cursed-fg);
+  --color-cursed-fg-muted: var(--cursed-fg-muted);
+  --color-cursed-fg-faint: var(--cursed-fg-faint);
+  --color-cursed-primary: var(--cursed-primary);
+  --color-cursed-primary-hover: var(--cursed-primary-hover);
+  --color-cursed-primary-muted: var(--cursed-primary-muted);
+  --color-cursed-secondary: var(--cursed-secondary);
+  --color-cursed-secondary-hover: var(--cursed-secondary-hover);
+  --color-cursed-accent: var(--cursed-accent);
+  --color-cursed-accent-muted: var(--cursed-accent-muted);
+  --color-cursed-destructive: var(--cursed-destructive);
+  --color-cursed-border: var(--cursed-border);
+  --color-cursed-border-hover: var(--cursed-border-hover);
+  --color-cursed-ring: var(--cursed-ring);
+}
+
+/* ============================================================================
+   BASE STYLES
+   ============================================================================ */
+
+body {
+  background-color: var(--cursed-bg);
+  color: var(--cursed-fg);
+  font-family: var(--cursed-font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================================================
+   CURSED ANIMATIONS — meditative, slow-floating, ritual energy
+   ============================================================================ */
+
+@keyframes cursed-float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-8px) rotate(0.5deg); }
+  66% { transform: translateY(4px) rotate(-0.3deg); }
+}
+
+@keyframes cursed-pulse-glow {
+  0%, 100% { opacity: 0.4; filter: blur(40px); }
+  50% { opacity: 0.7; filter: blur(60px); }
+}
+
+@keyframes cursed-drift {
+  0% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(10px, -15px) scale(1.02); }
+  50% { transform: translate(-5px, -25px) scale(0.98); }
+  75% { transform: translate(-15px, -10px) scale(1.01); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+@keyframes cursed-sigil-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes cursed-terminal-blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+@keyframes cursed-breathe {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.05); opacity: 1; }
+}
+
+/* Utility classes for animations */
+.cursed-float {
+  animation: cursed-float 8s ease-in-out infinite;
+}
+
+.cursed-drift {
+  animation: cursed-drift 20s ease-in-out infinite;
+}
+
+.cursed-pulse {
+  animation: cursed-pulse-glow 6s ease-in-out infinite;
+}
+
+.cursed-sigil {
+  animation: cursed-sigil-spin 60s linear infinite;
+}
+
+.cursed-breathe {
+  animation: cursed-breathe 4s ease-in-out infinite;
+}
+
+.cursed-terminal-cursor::after {
+  content: '\2588';
+  animation: cursed-terminal-blink 1s step-end infinite;
+  color: var(--cursed-primary);
+  margin-left: 2px;
+}
+
+/* ============================================================================
+   SCROLLBAR STYLING
+   ============================================================================ */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--cursed-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--cursed-fg-faint);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--cursed-fg-muted);
+}
+
+/* ============================================================================
+   SELECTION STYLING
+   ============================================================================ */
+
+::selection {
+  background: var(--cursed-primary-muted);
+  color: var(--cursed-fg);
+}
+
+@theme inline {
+  --font-heading:              var(--font-sans);
+  --font-sans:              'Geist Variable', sans-serif;
+  --color-sidebar-ring:              var(--sidebar-ring);
+  --color-sidebar-border:              var(--sidebar-border);
+  --color-sidebar-accent-foreground:              var(--sidebar-accent-foreground);
+  --color-sidebar-accent:              var(--sidebar-accent);
+  --color-sidebar-primary-foreground:              var(--sidebar-primary-foreground);
+  --color-sidebar-primary:              var(--sidebar-primary);
+  --color-sidebar-foreground:              var(--sidebar-foreground);
+  --color-sidebar:              var(--sidebar);
+  --color-chart-5:              var(--chart-5);
+  --color-chart-4:              var(--chart-4);
+  --color-chart-3:              var(--chart-3);
+  --color-chart-2:              var(--chart-2);
+  --color-chart-1:              var(--chart-1);
+  --color-ring:              var(--ring);
+  --color-input:              var(--input);
+  --color-border:              var(--border);
+  --color-destructive:              var(--destructive);
+  --color-accent-foreground:              var(--accent-foreground);
+  --color-accent:              var(--accent);
+  --color-muted-foreground:              var(--muted-foreground);
+  --color-muted:              var(--muted);
+  --color-secondary-foreground:              var(--secondary-foreground);
+  --color-secondary:              var(--secondary);
+  --color-primary-foreground:              var(--primary-foreground);
+  --color-primary:              var(--primary);
+  --color-popover-foreground:              var(--popover-foreground);
+  --color-popover:              var(--popover);
+  --color-card-foreground:              var(--card-foreground);
+  --color-card:              var(--card);
+  --color-foreground:              var(--foreground);
+  --color-background:              var(--background);
+  --radius-sm:              calc(var(--radius) * 0.6);
+  --radius-md:              calc(var(--radius) * 0.8);
+  --radius-lg:              var(--radius);
+  --radius-xl:              calc(var(--radius) * 1.4);
+  --radius-2xl:              calc(var(--radius) * 1.8);
+  --radius-3xl:              calc(var(--radius) * 2.2);
+  --radius-4xl:              calc(var(--radius) * 2.6);
+}
+
+.dark {
+  --background:              oklch(0.145 0 0);
+  --foreground:              oklch(0.985 0 0);
+  --card:              oklch(0.205 0 0);
+  --card-foreground:              oklch(0.985 0 0);
+  --popover:              oklch(0.205 0 0);
+  --popover-foreground:              oklch(0.985 0 0);
+  --primary:              oklch(0.922 0 0);
+  --primary-foreground:              oklch(0.205 0 0);
+  --secondary:              oklch(0.269 0 0);
+  --secondary-foreground:              oklch(0.985 0 0);
+  --muted:              oklch(0.269 0 0);
+  --muted-foreground:              oklch(0.708 0 0);
+  --accent:              oklch(0.269 0 0);
+  --accent-foreground:              oklch(0.985 0 0);
+  --destructive:              oklch(0.704 0.191 22.216);
+  --border:              oklch(1 0 0 / 10%);
+  --input:              oklch(1 0 0 / 15%);
+  --ring:              oklch(0.556 0 0);
+  --chart-1:              oklch(0.87 0 0);
+  --chart-2:              oklch(0.556 0 0);
+  --chart-3:              oklch(0.439 0 0);
+  --chart-4:              oklch(0.371 0 0);
+  --chart-5:              oklch(0.269 0 0);
+  --sidebar:              oklch(0.205 0 0);
+  --sidebar-foreground:              oklch(0.985 0 0);
+  --sidebar-primary:              oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground:              oklch(0.985 0 0);
+  --sidebar-accent:              oklch(0.269 0 0);
+  --sidebar-accent-foreground:              oklch(0.985 0 0);
+  --sidebar-border:              oklch(1 0 0 / 10%);
+  --sidebar-ring:              oklch(0.556 0 0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
