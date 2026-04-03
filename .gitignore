@@ -1,0 +1,46 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+storybook-static/
+
+# Logs
+*.log
+debug-storybook.log
+
+# Internal Claude tracking
+claude-progress.txt
+
+# Local reference images
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.webp
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# TypeScript
+*.tsbuildinfo
+
+# Vitest / coverage
+coverage/
+.vitest-cache/
+
+# Storybook cache
+.storybook/cache/
+node_modules/.cache/
