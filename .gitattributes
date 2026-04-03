@@ -1,0 +1,12 @@
+# Set the default behavior, in case people don't have core.autocrlf set.
+* text=auto
+
+# Explicitly declare JavaScript/TypeScript files to always be LF on checkout
+# and CRLF on Windows if desired, but "auto" usually handles this best.
+# If you want to force LF in the repository:
+*.js text eol=lf
+*.ts text eol=lf
+*.tsx text eol=lf
+*.css text eol=lf
+*.json text eol=lf
+*.md text eol=lf
