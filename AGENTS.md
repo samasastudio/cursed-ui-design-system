@@ -34,15 +34,15 @@ src/
 
 ## Theme System
 
-Themes are applied via a `data-theme` attribute on the document root. All tokens are CSS custom properties defined in `src/index.css`. The `:root` block doubles as the Yerkir defaults.
+Themes are applied via a `data-theme` attribute on the document root. All tokens are CSS custom properties defined in `src/index.css`. The `:root` block doubles as the Shrine defaults.
 
 ### The Three Themes
 
 | Theme  | Attribute             | Intent                                     |
 | ------ | --------------------- | ------------------------------------------ |
-| Yerkir | `data-theme="yerkir"` | Warm sunset gradient — real estate, ritual |
-| Nohemi | `data-theme="nohemi"` | High-contrast neon — editorial, grimoire   |
-| Soun   | `data-theme="soun"`   | Spectrum cosmic — music, spatial           |
+| Shrine | `data-theme="shrine"` | Warm sunset gradient — real estate, ritual |
+| Shadow | `data-theme="shadow"` | High-contrast neon — editorial, grimoire   |
+| Void   | `data-theme="void"`   | Spectrum cosmic — music, spatial           |
 
 ### Token Namespace
 
@@ -63,9 +63,9 @@ Fonts are loaded via `<link>` tags in `.storybook/preview-head.html`, not CSS `@
 
 | Theme  | Display Font | Body Font     | Mono Font      |
 | ------ | ------------ | ------------- | -------------- |
-| Yerkir | Boldonse     | Space Grotesk | JetBrains Mono |
-| Nohemi | Aoboshi One  | Aoboshi One   | JetBrains Mono |
-| Soun   | Google Sans  | Google Sans   | JetBrains Mono |
+| Shrine | Boldonse     | Space Grotesk | JetBrains Mono |
+| Shadow | Aoboshi One  | Aoboshi One   | JetBrains Mono |
+| Void   | Google Sans  | Google Sans   | JetBrains Mono |
 
 When consuming these themes outside of Storybook, you must provide equivalent font loading (link tags, `@font-face`, or a font provider).
 
@@ -87,10 +87,10 @@ When consuming these themes outside of Storybook, you must provide equivalent fo
 ## Storybook Configuration
 
 - **Preview** (`.storybook/preview.ts`): Imports `src/index.css`, applies `data-theme` attribute, listens for `cursed-ui/theme-change` channel events.
-- **Manager** (`.storybook/manager.ts`): Toolbar addon that cycles themes (Yerkir → Nohemi → Soun) and emits channel events.
+- **Manager** (`.storybook/manager.ts`): Toolbar addon that cycles themes (Shrine → Shadow → Void) and emits channel events.
 - **Fonts** (`.storybook/preview-head.html`): Google Fonts `<link>` tags for all theme fonts.
 
-Default theme on load: **Yerkir**.
+Default theme on load: **Shrine**.
 
 ## Adding Components
 

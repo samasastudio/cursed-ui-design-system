@@ -100,10 +100,10 @@ export const PresetMist: StoryObj = {
    Theme-matched custom gradients
    ----------------------------------------------------------------------- */
 
-export const YerkirSunsetRitual: StoryObj = {
-  name: "Yerkir / Sunset Ritual",
+export const ShrineSunsetRitual: StoryObj = {
+  name: "Shrine / Sunset Ritual",
   render: () => (
-    <GradientStage label="Yerkir — Sunset Ritual">
+    <GradientStage label="Shrine — Sunset Ritual">
       <AnimatedGradient
         config={{
           preset: "custom",
@@ -127,10 +127,10 @@ export const YerkirSunsetRitual: StoryObj = {
   ),
 };
 
-export const NohemiNeonGrimoire: StoryObj = {
-  name: "Nohemi / Neon Grimoire",
+export const ShadowNeonGrimoire: StoryObj = {
+  name: "Shadow / Neon Grimoire",
   render: () => (
-    <GradientStage label="Nohemi — Neon Grimoire">
+    <GradientStage label="Shadow — Neon Grimoire">
       <AnimatedGradient
         config={{
           preset: "custom",
@@ -154,10 +154,10 @@ export const NohemiNeonGrimoire: StoryObj = {
   ),
 };
 
-export const SounCosmicPulse: StoryObj = {
-  name: "Soun / Cosmic Pulse",
+export const VoidCosmicPulse: StoryObj = {
+  name: "Void / Cosmic Pulse",
   render: () => (
-    <GradientStage label="Soun — Cosmic Pulse">
+    <GradientStage label="Void — Cosmic Pulse">
       <AnimatedGradient
         config={{
           preset: "custom",
@@ -229,7 +229,7 @@ function ThemeTriptych() {
             className="text-2xl tracking-wide"
             style={{ fontFamily: "'Boldonse', cursive", color: "#e1e1e1" }}
           >
-            Yerkir
+            Shrine
           </span>
           <span
             className="text-xs mt-2 tracking-widest uppercase"
@@ -268,7 +268,7 @@ function ThemeTriptych() {
             className="text-2xl"
             style={{ fontFamily: "'Aoboshi One', serif", color: "#e3e3e1" }}
           >
-            Nohemi
+            Shadow
           </span>
           <span
             className="text-xs mt-2 tracking-widest uppercase"
@@ -310,7 +310,7 @@ function ThemeTriptych() {
               color: "#e0e0e0",
             }}
           >
-            Soun
+            Void
           </span>
           <span
             className="text-xs mt-2 tracking-widest uppercase"

@@ -7,244 +7,248 @@
 
 /* ============================================================================
    CURSED UI — Digital Occult Design System
-   Three themes: Yerkir (sunset ritual), Nohemi (neon grimoire), Soun (cosmic pulse)
+   Three themes: Shrine (sunset ritual), Shadow (neon grimoire), Void (cosmic pulse)
    Fonts loaded via <link> tags in .storybook/preview-head.html
    ============================================================================ */
 
 /* ============================================================================
-   DEFAULT / YERKIR — Sunset Ritual
+   DEFAULT / SHRINE — Sunset Ritual
    ============================================================================ */
 :root {
   /* Cursed UI tokens
      Palette from reference (L→R): #111419, #26366B, #E1E1E1, #A1C1E3, #E84C2E, #ECDC87 */
-  --cursed-bg:              #0b0d11;
-  --cursed-bg-elevated:     #111419;
-  --cursed-bg-surface:      #1a1d25;
-  --cursed-bg-overlay:      rgba(11, 13, 17, 0.85);
-  --cursed-fg:              #e1e1e1;
-  --cursed-fg-muted:        #8a8d96;
-  --cursed-fg-faint:        #4a4d56;
-  --cursed-primary:         #e84c2e;
-  --cursed-primary-hover:   #f25a3e;
-  --cursed-primary-muted:   rgba(232, 76, 46, 0.15);
-  --cursed-secondary:       #26366b;
+  --cursed-bg: #0b0d11;
+  --cursed-bg-elevated: #111419;
+  --cursed-bg-surface: #1a1d25;
+  --cursed-bg-overlay: rgba(11, 13, 17, 0.85);
+  --cursed-fg: #e1e1e1;
+  --cursed-fg-muted: #8a8d96;
+  --cursed-fg-faint: #4a4d56;
+  --cursed-primary: #e84c2e;
+  --cursed-primary-hover: #f25a3e;
+  --cursed-primary-muted: rgba(232, 76, 46, 0.15);
+  --cursed-secondary: #26366b;
   --cursed-secondary-hover: #354a8e;
-  --cursed-accent:          #a1c1e3;
-  --cursed-accent-muted:    rgba(161, 193, 227, 0.12);
-  --cursed-highlight:       #ecdc87;
+  --cursed-accent: #a1c1e3;
+  --cursed-accent-muted: rgba(161, 193, 227, 0.12);
+  --cursed-highlight: #ecdc87;
   --cursed-highlight-muted: rgba(236, 220, 135, 0.15);
-  --cursed-destructive:     #ff3b3b;
-  --cursed-border:          rgba(161, 193, 227, 0.1);
-  --cursed-border-hover:    rgba(161, 193, 227, 0.2);
-  --cursed-ring:            rgba(232, 76, 46, 0.4);
+  --cursed-destructive: #ff3b3b;
+  --cursed-border: rgba(161, 193, 227, 0.1);
+  --cursed-border-hover: rgba(161, 193, 227, 0.2);
+  --cursed-ring: rgba(232, 76, 46, 0.4);
   /* Gradient: navy → blue → orange → yellow (sunset) */
-  --cursed-gradient-1:      #26366b;
-  --cursed-gradient-2:      #e84c2e;
-  --cursed-gradient-3:      #ecdc87;
-  --cursed-font-display:    'Boldonse', cursive;
-  --cursed-font-body:       'Space Grotesk', sans-serif;
-  --cursed-font-mono:       'JetBrains Mono', monospace;
-  --cursed-glow:            0 0 40px rgba(232, 76, 46, 0.15), 0 0 80px rgba(38, 54, 107, 0.08);
-  --cursed-shadow:          0 4px 24px rgba(0, 0, 0, 0.4);
+  --cursed-gradient-1: #26366b;
+  --cursed-gradient-2: #e84c2e;
+  --cursed-gradient-3: #ecdc87;
+  --cursed-font-display: "Boldonse", cursive;
+  --cursed-font-body: "Space Grotesk", sans-serif;
+  --cursed-font-mono: "JetBrains Mono", monospace;
+  --cursed-glow:
+    0 0 40px rgba(232, 76, 46, 0.15), 0 0 80px rgba(38, 54, 107, 0.08);
+  --cursed-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
 
   /* shadcn tokens — mapped to Cursed UI dark palette */
-  --background:             #0b0d11;
-  --foreground:             #e1e1e1;
-  --card:                   #111419;
-  --card-foreground:        #e1e1e1;
-  --popover:                #111419;
-  --popover-foreground:     #e1e1e1;
-  --primary:                #e84c2e;
-  --primary-foreground:     #ffffff;
-  --secondary:              #1a1d25;
-  --secondary-foreground:   #e1e1e1;
-  --muted:                  #1a1d25;
-  --muted-foreground:       #8a8d96;
-  --accent:                 #a1c1e3;
-  --accent-foreground:      #0b0d11;
-  --destructive:            #ff3b3b;
-  --border:                 rgba(161, 193, 227, 0.1);
-  --input:                  rgba(161, 193, 227, 0.15);
-  --ring:                   rgba(232, 76, 46, 0.4);
-  --radius:                 0.5rem;
+  --background: #0b0d11;
+  --foreground: #e1e1e1;
+  --card: #111419;
+  --card-foreground: #e1e1e1;
+  --popover: #111419;
+  --popover-foreground: #e1e1e1;
+  --primary: #e84c2e;
+  --primary-foreground: #ffffff;
+  --secondary: #1a1d25;
+  --secondary-foreground: #e1e1e1;
+  --muted: #1a1d25;
+  --muted-foreground: #8a8d96;
+  --accent: #a1c1e3;
+  --accent-foreground: #0b0d11;
+  --destructive: #ff3b3b;
+  --border: rgba(161, 193, 227, 0.1);
+  --input: rgba(161, 193, 227, 0.15);
+  --ring: rgba(232, 76, 46, 0.4);
+  --radius: 0.5rem;
 
-  --chart-1:                #e84c2e;
-  --chart-2:                #26366b;
-  --chart-3:                #a1c1e3;
-  --chart-4:                #ecdc87;
-  --chart-5:                #4a4d56;
+  --chart-1: #e84c2e;
+  --chart-2: #26366b;
+  --chart-3: #a1c1e3;
+  --chart-4: #ecdc87;
+  --chart-5: #4a4d56;
 
-  --sidebar:                #111419;
-  --sidebar-foreground:     #e1e1e1;
-  --sidebar-primary:        #e84c2e;
+  --sidebar: #111419;
+  --sidebar-foreground: #e1e1e1;
+  --sidebar-primary: #e84c2e;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent:         #1a1d25;
+  --sidebar-accent: #1a1d25;
   --sidebar-accent-foreground: #e1e1e3;
-  --sidebar-border:         rgba(193, 191, 227, 0.1);
-  --sidebar-ring:           rgba(222, 74, 46, 0.4);
+  --sidebar-border: rgba(193, 191, 227, 0.1);
+  --sidebar-ring: rgba(222, 74, 46, 0.4);
 }
 
 /* ============================================================================
-   YERKIR — Sunset Ritual (explicit selector)
+   SHRINE — Sunset Ritual (explicit selector)
    ============================================================================ */
-[data-theme="yerkir"] {
-  --cursed-bg:              #0b0d11;
-  --cursed-bg-elevated:     #111419;
-  --cursed-bg-surface:      #1a1d25;
-  --cursed-bg-overlay:      rgba(11, 13, 17, 0.85);
-  --cursed-fg:              #e1e1e1;
-  --cursed-fg-muted:        #8a8d96;
-  --cursed-fg-faint:        #4a4d56;
-  --cursed-primary:         #e84c2e;
-  --cursed-primary-hover:   #f25a3e;
-  --cursed-primary-muted:   rgba(232, 76, 46, 0.15);
-  --cursed-secondary:       #26366b;
+[data-theme="shrine"] {
+  --cursed-bg: #0b0d11;
+  --cursed-bg-elevated: #111419;
+  --cursed-bg-surface: #1a1d25;
+  --cursed-bg-overlay: rgba(11, 13, 17, 0.85);
+  --cursed-fg: #e1e1e1;
+  --cursed-fg-muted: #8a8d96;
+  --cursed-fg-faint: #4a4d56;
+  --cursed-primary: #e84c2e;
+  --cursed-primary-hover: #f25a3e;
+  --cursed-primary-muted: rgba(232, 76, 46, 0.15);
+  --cursed-secondary: #26366b;
   --cursed-secondary-hover: #354a8e;
-  --cursed-accent:          #a1c1e3;
-  --cursed-accent-muted:    rgba(161, 193, 227, 0.12);
-  --cursed-highlight:       #ecdc87;
+  --cursed-accent: #a1c1e3;
+  --cursed-accent-muted: rgba(161, 193, 227, 0.12);
+  --cursed-highlight: #ecdc87;
   --cursed-highlight-muted: rgba(236, 220, 135, 0.15);
-  --cursed-destructive:     #ff3b3b;
-  --cursed-border:          rgba(161, 193, 227, 0.1);
-  --cursed-border-hover:    rgba(161, 193, 227, 0.2);
-  --cursed-ring:            rgba(232, 76, 46, 0.4);
-  --cursed-gradient-1:      #26366b;
-  --cursed-gradient-2:      #e84c2e;
-  --cursed-gradient-3:      #ecdc87;
-  --cursed-font-display:    'Boldonse', cursive;
-  --cursed-font-body:       'Space Grotesk', sans-serif;
-  --cursed-font-mono:       'JetBrains Mono', monospace;
-  --cursed-glow:            0 0 40px rgba(232, 76, 46, 0.15), 0 0 80px rgba(38, 54, 107, 0.08);
-  --cursed-shadow:          0 4px 24px rgba(0, 0, 0, 0.4);
+  --cursed-destructive: #ff3b3b;
+  --cursed-border: rgba(161, 193, 227, 0.1);
+  --cursed-border-hover: rgba(161, 193, 227, 0.2);
+  --cursed-ring: rgba(232, 76, 46, 0.4);
+  --cursed-gradient-1: #26366b;
+  --cursed-gradient-2: #e84c2e;
+  --cursed-gradient-3: #ecdc87;
+  --cursed-font-display: "Boldonse", cursive;
+  --cursed-font-body: "Space Grotesk", sans-serif;
+  --cursed-font-mono: "JetBrains Mono", monospace;
+  --cursed-glow:
+    0 0 40px rgba(232, 76, 46, 0.15), 0 0 80px rgba(38, 54, 107, 0.08);
+  --cursed-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
 
-  --background:             #0b0d11;
-  --foreground:             #e1e1e1;
-  --card:                   #111419;
-  --card-foreground:        #e1e1e1;
-  --popover:                #111419;
-  --popover-foreground:     #e1e1e1;
-  --primary:                #e84c2e;
-  --primary-foreground:     #ffffff;
-  --secondary:              #1a1d25;
-  --secondary-foreground:   #e1e1e1;
-  --muted:                  #1a1d25;
-  --muted-foreground:       #8a8d96;
-  --accent:                 #a1c1e3;
-  --accent-foreground:      #0b0d11;
-  --destructive:            #ff3b3b;
-  --border:                 rgba(161, 193, 227, 0.1);
-  --input:                  rgba(161, 193, 227, 0.15);
-  --ring:                   rgba(232, 76, 46, 0.4);
+  --background: #0b0d11;
+  --foreground: #e1e1e1;
+  --card: #111419;
+  --card-foreground: #e1e1e1;
+  --popover: #111419;
+  --popover-foreground: #e1e1e1;
+  --primary: #e84c2e;
+  --primary-foreground: #ffffff;
+  --secondary: #1a1d25;
+  --secondary-foreground: #e1e1e1;
+  --muted: #1a1d25;
+  --muted-foreground: #8a8d96;
+  --accent: #a1c1e3;
+  --accent-foreground: #0b0d11;
+  --destructive: #ff3b3b;
+  --border: rgba(161, 193, 227, 0.1);
+  --input: rgba(161, 193, 227, 0.15);
+  --ring: rgba(232, 76, 46, 0.4);
 }
 
 /* ============================================================================
-   NOHEMI — Neon Grimoire
+   SHADOW — Neon Grimoire
    ============================================================================ */
-[data-theme="nohemi"] {
-  --cursed-bg:              #050505;
-  --cursed-bg-elevated:     #0d0d0d;
-  --cursed-bg-surface:      #161616;
-  --cursed-bg-overlay:      rgba(5, 5, 5, 0.88);
-  --cursed-fg:              #e3e3e1;
-  --cursed-fg-muted:        #8a8a88;
-  --cursed-fg-faint:        #4a4a48;
-  --cursed-primary:         #ff4e00;
-  --cursed-primary-hover:   #ff6a2a;
-  --cursed-primary-muted:   rgba(255, 78, 0, 0.12);
-  --cursed-secondary:       #4415b4;
+[data-theme="shadow"] {
+  --cursed-bg: #050505;
+  --cursed-bg-elevated: #0d0d0d;
+  --cursed-bg-surface: #161616;
+  --cursed-bg-overlay: rgba(5, 5, 5, 0.88);
+  --cursed-fg: #e3e3e1;
+  --cursed-fg-muted: #8a8a88;
+  --cursed-fg-faint: #4a4a48;
+  --cursed-primary: #ff4e00;
+  --cursed-primary-hover: #ff6a2a;
+  --cursed-primary-muted: rgba(255, 78, 0, 0.12);
+  --cursed-secondary: #4415b4;
   --cursed-secondary-hover: #5a2ed0;
-  --cursed-accent:          #7b3fe4;
-  --cursed-accent-muted:    rgba(123, 63, 228, 0.12);
-  --cursed-destructive:     #ff2d2d;
-  --cursed-border:          rgba(227, 227, 225, 0.08);
-  --cursed-border-hover:    rgba(227, 227, 225, 0.16);
-  --cursed-ring:            rgba(255, 78, 0, 0.4);
-  --cursed-gradient-1:      #ff4e00;
-  --cursed-gradient-2:      #4415b4;
-  --cursed-gradient-3:      #7b3fe4;
-  --cursed-font-display:    'Aoboshi One', serif;
-  --cursed-font-body:       'Aoboshi One', serif;
-  --cursed-font-mono:       'JetBrains Mono', monospace;
-  --cursed-glow:            0 0 40px rgba(255, 78, 0, 0.12), 0 0 80px rgba(68, 21, 180, 0.08);
-  --cursed-shadow:          0 4px 24px rgba(0, 0, 0, 0.5);
+  --cursed-accent: #7b3fe4;
+  --cursed-accent-muted: rgba(123, 63, 228, 0.12);
+  --cursed-destructive: #ff2d2d;
+  --cursed-border: rgba(227, 227, 225, 0.08);
+  --cursed-border-hover: rgba(227, 227, 225, 0.16);
+  --cursed-ring: rgba(255, 78, 0, 0.4);
+  --cursed-gradient-1: #ff4e00;
+  --cursed-gradient-2: #4415b4;
+  --cursed-gradient-3: #7b3fe4;
+  --cursed-font-display: "Aoboshi One", serif;
+  --cursed-font-body: "Aoboshi One", serif;
+  --cursed-font-mono: "JetBrains Mono", monospace;
+  --cursed-glow:
+    0 0 40px rgba(255, 78, 0, 0.12), 0 0 80px rgba(68, 21, 180, 0.08);
+  --cursed-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
 
-  --background:             #050505;
-  --foreground:             #e3e3e1;
-  --card:                   #0d0d0d;
-  --card-foreground:        #e3e3e1;
-  --popover:                #0d0d0d;
-  --popover-foreground:     #e3e3e1;
-  --primary:                #ff4e00;
-  --primary-foreground:     #ffffff;
-  --secondary:              #161616;
-  --secondary-foreground:   #e3e3e1;
-  --muted:                  #161616;
-  --muted-foreground:       #8a8a88;
-  --accent:                 #7b3fe4;
-  --accent-foreground:      #ffffff;
-  --destructive:            #ff2d2d;
-  --border:                 rgba(227, 227, 225, 0.08);
-  --input:                  rgba(227, 227, 225, 0.12);
-  --ring:                   rgba(255, 78, 0, 0.4);
+  --background: #050505;
+  --foreground: #e3e3e1;
+  --card: #0d0d0d;
+  --card-foreground: #e3e3e1;
+  --popover: #0d0d0d;
+  --popover-foreground: #e3e3e1;
+  --primary: #ff4e00;
+  --primary-foreground: #ffffff;
+  --secondary: #161616;
+  --secondary-foreground: #e3e3e1;
+  --muted: #161616;
+  --muted-foreground: #8a8a88;
+  --accent: #7b3fe4;
+  --accent-foreground: #ffffff;
+  --destructive: #ff2d2d;
+  --border: rgba(227, 227, 225, 0.08);
+  --input: rgba(227, 227, 225, 0.12);
+  --ring: rgba(255, 78, 0, 0.4);
 }
 
 /* ============================================================================
-   SOUN — Cosmic Pulse
+   VOID — Cosmic Pulse
    Near-black base, spectrum gradient accent (navy→blue→purple→magenta→pink→coral)
    ============================================================================ */
-[data-theme="soun"] {
+[data-theme="void"] {
   /* Backgrounds: near-black, not teal — true to reference */
-  --cursed-bg:              #030304;
-  --cursed-bg-elevated:     #0a0a0c;
-  --cursed-bg-surface:      #121215;
-  --cursed-bg-overlay:      rgba(3, 3, 4, 0.90);
+  --cursed-bg: #030304;
+  --cursed-bg-elevated: #0a0a0c;
+  --cursed-bg-surface: #121215;
+  --cursed-bg-overlay: rgba(3, 3, 4, 0.9);
   /* Foreground: neutral white/gray, no tint */
-  --cursed-fg:              #e6e6e8;
-  --cursed-fg-muted:        #7c7c82;
-  --cursed-fg-faint:        #3e3e44;
+  --cursed-fg: #e6e6e8;
+  --cursed-fg-muted: #7c7c82;
+  --cursed-fg-faint: #3e3e44;
   /* Primary: the blue from the gradient spectrum */
-  --cursed-primary:         #4d6cfa;
-  --cursed-primary-hover:   #6b85ff;
-  --cursed-primary-muted:   rgba(77, 108, 250, 0.12);
+  --cursed-primary: #4d6cfa;
+  --cursed-primary-hover: #6b85ff;
+  --cursed-primary-muted: rgba(77, 108, 250, 0.12);
   /* Secondary: magenta/pink from the spectrum */
-  --cursed-secondary:       #c44aef;
+  --cursed-secondary: #c44aef;
   --cursed-secondary-hover: #d570f5;
   /* Accent: coral/orange — the warm end of the spectrum */
-  --cursed-accent:          #f56e4a;
-  --cursed-accent-muted:    rgba(245, 110, 74, 0.10);
-  --cursed-destructive:     #ef4444;
-  --cursed-border:          rgba(230, 230, 232, 0.06);
-  --cursed-border-hover:    rgba(230, 230, 232, 0.14);
-  --cursed-ring:            rgba(77, 108, 250, 0.4);
+  --cursed-accent: #f56e4a;
+  --cursed-accent-muted: rgba(245, 110, 74, 0.1);
+  --cursed-destructive: #ef4444;
+  --cursed-border: rgba(230, 230, 232, 0.06);
+  --cursed-border-hover: rgba(230, 230, 232, 0.14);
+  --cursed-ring: rgba(77, 108, 250, 0.4);
   /* Gradient: the full spectrum strip from the branding sheet */
-  --cursed-gradient-1:      #2b3a8e;
-  --cursed-gradient-2:      #c44aef;
-  --cursed-gradient-3:      #f56e4a;
-  --cursed-font-display:    'Google Sans', sans-serif;
-  --cursed-font-body:       'Google Sans', sans-serif;
-  --cursed-font-mono:       'JetBrains Mono', monospace;
-  --cursed-glow:            0 0 40px rgba(196, 74, 239, 0.10), 0 0 80px rgba(77, 108, 250, 0.06);
-  --cursed-shadow:          0 4px 24px rgba(0, 0, 0, 0.6);
+  --cursed-gradient-1: #2b3a8e;
+  --cursed-gradient-2: #c44aef;
+  --cursed-gradient-3: #f56e4a;
+  --cursed-font-display: "Google Sans", sans-serif;
+  --cursed-font-body: "Google Sans", sans-serif;
+  --cursed-font-mono: "JetBrains Mono", monospace;
+  --cursed-glow:
+    0 0 40px rgba(196, 74, 239, 0.1), 0 0 80px rgba(77, 108, 250, 0.06);
+  --cursed-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
 
   /* shadcn token mapping */
-  --background:             #030304;
-  --foreground:             #e6e6e8;
-  --card:                   #0a0a0c;
-  --card-foreground:        #e6e6e8;
-  --popover:                #0a0a0c;
-  --popover-foreground:     #e6e6e8;
-  --primary:                #4d6cfa;
-  --primary-foreground:     #ffffff;
-  --secondary:              #121215;
-  --secondary-foreground:   #e6e6e8;
-  --muted:                  #121215;
-  --muted-foreground:       #7c7c82;
-  --accent:                 #c44aef;
-  --accent-foreground:      #ffffff;
-  --destructive:            #ef4444;
-  --border:                 rgba(230, 230, 232, 0.06);
-  --input:                  rgba(230, 230, 232, 0.10);
-  --ring:                   rgba(77, 108, 250, 0.4);
+  --background: #030304;
+  --foreground: #e6e6e8;
+  --card: #0a0a0c;
+  --card-foreground: #e6e6e8;
+  --popover: #0a0a0c;
+  --popover-foreground: #e6e6e8;
+  --primary: #4d6cfa;
+  --primary-foreground: #ffffff;
+  --secondary: #121215;
+  --secondary-foreground: #e6e6e8;
+  --muted: #121215;
+  --muted-foreground: #7c7c82;
+  --accent: #c44aef;
+  --accent-foreground: #ffffff;
+  --destructive: #ef4444;
+  --border: rgba(230, 230, 232, 0.06);
+  --input: rgba(230, 230, 232, 0.1);
+  --ring: rgba(77, 108, 250, 0.4);
 }
 
 /* ============================================================================
@@ -335,37 +339,78 @@
    ============================================================================ */
 
 @keyframes cursed-float {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  33% { transform: translateY(-8px) rotate(0.5deg); }
-  66% { transform: translateY(4px) rotate(-0.3deg); }
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-8px) rotate(0.5deg);
+  }
+  66% {
+    transform: translateY(4px) rotate(-0.3deg);
+  }
 }
 
 @keyframes cursed-pulse-glow {
-  0%, 100% { opacity: 0.4; filter: blur(40px); }
-  50% { opacity: 0.7; filter: blur(60px); }
+  0%,
+  100% {
+    opacity: 0.4;
+    filter: blur(40px);
+  }
+  50% {
+    opacity: 0.7;
+    filter: blur(60px);
+  }
 }
 
 @keyframes cursed-drift {
-  0% { transform: translate(0, 0) scale(1); }
-  25% { transform: translate(10px, -15px) scale(1.02); }
-  50% { transform: translate(-5px, -25px) scale(0.98); }
-  75% { transform: translate(-15px, -10px) scale(1.01); }
-  100% { transform: translate(0, 0) scale(1); }
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(10px, -15px) scale(1.02);
+  }
+  50% {
+    transform: translate(-5px, -25px) scale(0.98);
+  }
+  75% {
+    transform: translate(-15px, -10px) scale(1.01);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
 }
 
 @keyframes cursed-sigil-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes cursed-terminal-blink {
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0; }
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
 }
 
 @keyframes cursed-breathe {
-  0%, 100% { transform: scale(1); opacity: 0.6; }
-  50% { transform: scale(1.05); opacity: 1; }
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
 }
 
 .cursed-float {
@@ -389,7 +434,7 @@
 }
 
 .cursed-terminal-cursor::after {
-  content: '\2588';
+  content: "\2588";
   animation: cursed-terminal-blink 1s step-end infinite;
   color: var(--cursed-primary);
   margin-left: 2px;
@@ -399,10 +444,20 @@
    SCROLLBAR
    ============================================================================ */
 
-::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: var(--cursed-bg); }
-::-webkit-scrollbar-thumb { background: var(--cursed-fg-faint); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--cursed-fg-muted); }
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--cursed-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--cursed-fg-faint);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--cursed-fg-muted);
+}
 
 ::selection {
   background: var(--cursed-primary-muted);

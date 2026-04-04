@@ -54,10 +54,10 @@ export const Default: StoryObj = {
    Theme-matched rays
    ----------------------------------------------------------------------- */
 
-export const YerkirSunsetRays: StoryObj = {
-  name: "Yerkir / Sunset Rays",
+export const ShrineSunsetRays: StoryObj = {
+  name: "Shrine / Sunset Rays",
   render: () => (
-    <RaysStage label="Yerkir — Sunset Rays">
+    <RaysStage label="Shrine — Sunset Rays">
       <Rays
         backgroundColor="#0b0d11"
         raysColor={{ mode: "multi", color1: "#e84c2e", color2: "#ecdc87" }}
@@ -71,10 +71,10 @@ export const YerkirSunsetRays: StoryObj = {
   ),
 };
 
-export const NohemiNeonRays: StoryObj = {
-  name: "Nohemi / Neon Rays",
+export const ShadowNeonRays: StoryObj = {
+  name: "Shadow / Neon Rays",
   render: () => (
-    <RaysStage label="Nohemi — Neon Rays">
+    <RaysStage label="Shadow — Neon Rays">
       <Rays
         backgroundColor="#050505"
         raysColor={{ mode: "multi", color1: "#ff4e00", color2: "#7b3fe4" }}
@@ -88,10 +88,10 @@ export const NohemiNeonRays: StoryObj = {
   ),
 };
 
-export const SounCosmicRays: StoryObj = {
-  name: "Soun / Cosmic Rays",
+export const VoidCosmicRays: StoryObj = {
+  name: "Void / Cosmic Rays",
   render: () => (
-    <RaysStage label="Soun — Cosmic Rays">
+    <RaysStage label="Void — Cosmic Rays">
       <Rays
         backgroundColor="#030304"
         raysColor={{ mode: "multi", color1: "#4d6cfa", color2: "#c44aef" }}

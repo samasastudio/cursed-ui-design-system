@@ -17,11 +17,11 @@ The system is not horror. It's not cyberpunk. It's the feeling of staring at a l
 
 ## The Three Themes
 
-Each theme was derived from a branding reference image in the repo root (`Yerkir Branding.jpg`, `Nohemi Branding.jpg`, `Soun Branding.jpg`). The palettes are extracted directly from these references, not invented.
+Each theme was derived from a branding reference image in the repo root (`Shrine Branding.jpg`, `Shadow Branding.jpg`, `Void Branding.jpg`). The palettes are extracted directly from these references, not invented.
 
 ---
 
-### Yerkir — Sunset Ritual
+### Shrine — Sunset Ritual
 
 **Mood:** A sunset viewed from a rooftop in a city that doesn't exist yet. Warm but serious. The golden hour before a ritual begins.
 
@@ -46,14 +46,14 @@ Each theme was derived from a branding reference image in the repo root (`Yerkir
 
 ---
 
-### Nohemi — Neon Grimoire
+### Shadow — Neon Grimoire
 
 **Mood:** A spell book rendered on an OLED screen. Maximum contrast. The orange burns against true black. Purple hums underneath like ultraviolet light leaking through cracks.
 
 **Palette hierarchy:**
 
 1. **Background** `#050505` — as close to true black as possible without aliasing artifacts
-2. **Neon orange** `#ff4e00` — the primary, brighter and more saturated than Yerkir's orange, almost fluorescent
+2. **Neon orange** `#ff4e00` — the primary, brighter and more saturated than Shrine's orange, almost fluorescent
 3. **Deep indigo** `#4415b4` — the secondary, a violet so dark it barely separates from the background until it hits light
 4. **Electric purple** `#7b3fe4` — the accent, the bridge between orange and indigo, where the gradient energy concentrates
 5. **Foreground** `#e3e3e1` — warm-tinted white
@@ -67,11 +67,11 @@ Each theme was derived from a branding reference image in the repo root (`Yerkir
 
 **Glow characteristic:** Orange is the dominant glow source with indigo bleeding in at the edges. High opacity falloff — glows are tight and concentrated, not diffuse.
 
-**Design note:** Nohemi is the most editorial of the three themes. It works best with generous whitespace and minimal element density. Let the contrast do the work.
+**Design note:** Shadow is the most editorial of the three themes. It works best with generous whitespace and minimal element density. Let the contrast do the work.
 
 ---
 
-### Soun — Cosmic Pulse
+### Void — Cosmic Pulse
 
 **Mood:** A music visualizer frozen mid-beat. The full visible spectrum compressed into a gradient strip, floating in near-void. Spatial, rhythmic, synthetic.
 
@@ -83,16 +83,16 @@ Each theme was derived from a branding reference image in the repo root (`Yerkir
 4. **Coral** `#f56e4a` — the accent, the warm terminus of the spectrum
 5. **Foreground** `#e6e6e8` — the coolest white of the three themes, almost clinical
 
-**Gradient direction:** Deep navy `#2b3a8e` → magenta → coral. The full spectrum sweep from the branding reference. This is the signature visual of Soun — wherever you see this gradient, you know you're in Soun.
+**Gradient direction:** Deep navy `#2b3a8e` → magenta → coral. The full spectrum sweep from the branding reference. This is the signature visual of Void — wherever you see this gradient, you know you're in Void.
 
 **Typography:**
 
-- **Display and body:** Google Sans — clean, geometric, product-grade. Less personality than Boldonse or Aoboshi, but that's the point. Soun is about the color and motion, not the letterforms.
+- **Display and body:** Google Sans — clean, geometric, product-grade. Less personality than Boldonse or Aoboshi, but that's the point. Void is about the color and motion, not the letterforms.
 - **Mono:** JetBrains Mono
 
-**Glow characteristic:** Magenta is the primary glow source with blue undertones. Glows are wider and softer than Nohemi — more atmospheric, less focused.
+**Glow characteristic:** Magenta is the primary glow source with blue undertones. Glows are wider and softer than Shadow — more atmospheric, less focused.
 
-**Design note:** Soun's near-void background means even subtle color has impact. Use the spectrum gradient as the hero and keep UI elements neutral. The gradient is the brand.
+**Design note:** Void's near-void background means even subtle color has impact. Use the spectrum gradient as the hero and keep UI elements neutral. The gradient is the brand.
 
 ---
 
