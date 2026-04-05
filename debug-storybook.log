@@ -1,13 +1,44 @@
-[19:22:35.854] [INFO] [36mInitializing Storybook[39m
-[19:22:36.665] [DEBUG] Getting package.json info for C:/Users/Owner/projects/cursed-storybook/package.json...
-[19:22:36.666] [DEBUG] Getting CLI versions from NPM for storybook...
-[19:22:36.666] [DEBUG] Executing command: npm info storybook version
-[19:22:38.697] [INFO] Adding Storybook version 10.3.4 to your project
-[19:22:38.701] [ERROR] Unable to initialize Storybook in this directory.
+[05:30:34.004] [INFO] storybook v10.3.4
+[05:30:36.733] [DEBUG] Getting package.json info for /home/user/cursed-ui-design-system/package.json...
+[05:30:36.745] [ERROR] [38;2;241;97;97mSB_CORE-SERVER_0002 (CriticalPresetLoadError): Storybook failed to load the following preset: @storybook/react-vite/preset.
 
-Storybook couldn't detect a supported framework or configuration for your project. Make sure you're inside a framework project (e.g., React, Vue, Svelte, Angular, Next.js) and that its dependencies are installed.
+Please check whether your setup is correct, the Storybook dependencies (and their peer dependencies) are installed correctly and there are no package version clashes.
 
-Tips:
-- Run init in an empty directory or create a new framework app first.
-- If this directory contains unrelated files, try a new directory for Storybook.
-[19:22:38.710] [INFO] Storybook collects completely anonymous usage telemetry. We use it to shape Storybook's roadmap and prioritize features. You can learn more, including how to opt out, at https://storybook.js.org/telemetry
+If you believe this is a bug, please open an issue on Github.
+
+Error [ERR_MODULE_NOT_FOUND]: Cannot find package '@storybook/react-vite' imported from /root/.npm/_npx/6fe9a9991b157df1/node_modules/storybook/dist/_node-chunks/chunk-QAXH75FV.js
+    at Object.getPackageJSONURL (node:internal/modules/package_json_reader:314:9)
+    at packageResolve (node:internal/modules/esm/resolve:768:81)
+    at moduleResolve (node:internal/modules/esm/resolve:855:18)
+    at defaultResolve (node:internal/modules/esm/resolve:985:11)
+    at nextResolve (node:internal/modules/esm/hooks:748:28)
+    at Hooks.resolve (node:internal/modules/esm/hooks:240:30)
+    at MessagePort.handleMessage (node:internal/modules/esm/worker:199:24)
+    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:843:20)
+    at MessagePort.<anonymous> (node:internal/per_context/messageport:23:28)
+
+More info: 
+[39m
+    at loadPreset (file:///root/.npm/_npx/6fe9a9991b157df1/node_modules/storybook/dist/_node-chunks/chunk-3LP2BDDH.js:10081:13)
+    at async Promise.all (index 0)
+    at async loadPresets (file:///root/.npm/_npx/6fe9a9991b157df1/node_modules/storybook/dist/_node-chunks/chunk-3LP2BDDH.js:10090:73)
+    at async getPresets (file:///root/.npm/_npx/6fe9a9991b157df1/node_modules/storybook/dist/_node-chunks/chunk-3LP2BDDH.js:10121:23)
+    at async buildDevStandalone (file:///root/.npm/_npx/6fe9a9991b157df1/node_modules/storybook/dist/core-server/index.js:7967:52)
+    at async withTelemetry (file:///root/.npm/_npx/6fe9a9991b157df1/node_modules/storybook/dist/_node-chunks/chunk-HUYNFPPD.js:225:12)
+    at async dev (file:///root/.npm/_npx/6fe9a9991b157df1/node_modules/storybook/dist/bin/core.js:2736:3)
+    at async _Command.<anonymous> (file:///root/.npm/_npx/6fe9a9991b157df1/node_modules/storybook/dist/bin/core.js:2806:92)
+[05:30:36.756] [WARN] Broken build, fix the error above.
+You may need to refresh the browser.
+[05:30:36.763] [WARN] Could not resolve addon "@chromatic-com/storybook", skipping. Is it installed?
+[05:30:36.765] [WARN] Could not resolve addon "@storybook/addon-vitest", skipping. Is it installed?
+[05:30:36.768] [WARN] Could not resolve addon "@storybook/addon-a11y", skipping. Is it installed?
+[05:30:36.770] [WARN] Could not resolve addon "@storybook/addon-docs", skipping. Is it installed?
+[05:30:36.772] [WARN] Could not resolve addon "@storybook/addon-onboarding", skipping. Is it installed?
+[05:30:36.775] [WARN] Could not resolve addon "@storybook/addon-mcp", skipping. Is it installed?
+[05:30:36.775] [WARN] Could not resolve addon "@chromatic-com/storybook", skipping. Is it installed?
+[05:30:36.776] [WARN] Could not resolve addon "@storybook/addon-vitest", skipping. Is it installed?
+[05:30:36.776] [WARN] Could not resolve addon "@storybook/addon-a11y", skipping. Is it installed?
+[05:30:36.776] [WARN] Could not resolve addon "@storybook/addon-docs", skipping. Is it installed?
+[05:30:36.777] [WARN] Could not resolve addon "@storybook/addon-onboarding", skipping. Is it installed?
+[05:30:36.777] [WARN] Could not resolve addon "@storybook/addon-mcp", skipping. Is it installed?
+[05:30:36.786] [INFO] Storybook collects completely anonymous usage telemetry. We use it to shape Storybook's roadmap and prioritize features. You can learn more, including how to opt out, at https://storybook.js.org/telemetry
