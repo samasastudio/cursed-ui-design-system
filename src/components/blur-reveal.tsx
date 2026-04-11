@@ -1,20 +1,20 @@
-import { AnimatePresence, motion } from "motion/react"
-import type React from "react"
+import { AnimatePresence, motion } from "motion/react";
+import type React from "react";
 
 export interface BlurRevealProps {
-  children: string
-  className?: string
-  delay?: number
-  speedReveal?: number
-  speedSegment?: number
-  trigger?: boolean
-  onAnimationComplete?: () => void
-  onAnimationStart?: () => void
-  as?: keyof React.JSX.IntrinsicElements
-  style?: React.CSSProperties
-  inView?: boolean
-  once?: boolean
-  letterSpacing?: string | number
+  children: string;
+  className?: string;
+  delay?: number;
+  speedReveal?: number;
+  speedSegment?: number;
+  trigger?: boolean;
+  onAnimationComplete?: () => void;
+  onAnimationStart?: () => void;
+  as?: keyof React.JSX.IntrinsicElements;
+  style?: React.CSSProperties;
+  inView?: boolean;
+  once?: boolean;
+  letterSpacing?: string | number;
 }
 
 export function BlurReveal({
@@ -32,10 +32,10 @@ export function BlurReveal({
   once = true,
   letterSpacing,
 }: BlurRevealProps) {
-  const MotionTag = motion[as as keyof typeof motion] as typeof motion.div
+  const MotionTag = motion[as as keyof typeof motion] as typeof motion.div;
 
-  const stagger = 0.03 / speedReveal
-  const baseDuration = 0.3 / speedSegment
+  const stagger = 0.03 / speedReveal;
+  const baseDuration = 0.3 / speedSegment;
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -52,7 +52,7 @@ export function BlurReveal({
         staggerDirection: -1,
       },
     },
-  }
+  };
 
   const itemVariants = {
     hidden: { opacity: 0, filter: "blur(12px)", y: 10 },
@@ -65,7 +65,7 @@ export function BlurReveal({
       },
     },
     exit: { opacity: 0, filter: "blur(12px)", y: 10 },
-  }
+  };
 
   return (
     <AnimatePresence mode="popLayout">
@@ -85,13 +85,19 @@ export function BlurReveal({
           <span className="sr-only">{children}</span>
           {children &&
             children.split(" ").map((word, wordIndex, wordsArray) => (
-              <span key={`word-${wordIndex}`} className="inline-block whitespace-nowrap" aria-hidden="true">
+              <span
+                key={`word-${wordIndex}`}
+                className="inline-block whitespace-nowrap align-top"
+                aria-hidden="true"
+              >
                 {word.split("").map((char, charIndex) => (
                   <motion.span
                     key={`char-${wordIndex}-${charIndex}`}
                     variants={itemVariants}
-                    className="inline-block"
-                    style={letterSpacing ? { marginRight: letterSpacing } : undefined}
+                    className="inline-block align-top"
+                    style={
+                      letterSpacing ? { marginRight: letterSpacing } : undefined
+                    }
                   >
                     {char}
                   </motion.span>
@@ -100,7 +106,7 @@ export function BlurReveal({
                   <motion.span
                     key={`space-${wordIndex}`}
                     variants={itemVariants}
-                    className="inline-block"
+                    className="inline-block align-top"
                   >
                     &nbsp;
                   </motion.span>
@@ -110,5 +116,5 @@ export function BlurReveal({
         </MotionTag>
       )}
     </AnimatePresence>
-  )
+  );
 }

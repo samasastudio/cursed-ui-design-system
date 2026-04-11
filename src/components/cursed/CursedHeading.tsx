@@ -1,10 +1,10 @@
-import React from 'react';
-import { cn } from '@/lib/utils';
-import { BlurReveal } from '@/components/blur-reveal';
-import { ShimmerText } from '@/components/shimmer-text';
+import React from "react";
+import { cn } from "@/lib/utils";
+import { BlurReveal } from "@/components/blur-reveal";
+import { ShimmerText } from "@/components/shimmer-text";
 
-type HeadingLevel = 'h1' | 'h2' | 'h3' | 'h4';
-type AnimationType = 'none' | 'blur-reveal' | 'shimmer';
+type HeadingLevel = "h1" | "h2" | "h3" | "h4";
+type AnimationType = "none" | "blur-reveal" | "shimmer";
 
 interface CursedHeadingProps {
   level?: HeadingLevel;
@@ -14,26 +14,26 @@ interface CursedHeadingProps {
 }
 
 const sizeMap: Record<HeadingLevel, string> = {
-  h1: 'text-5xl md:text-7xl font-bold tracking-[-0.04em] leading-[1.05]',
-  h2: 'text-3xl md:text-5xl font-bold tracking-[-0.03em] leading-[1.1]',
-  h3: 'text-2xl md:text-3xl font-semibold tracking-[-0.02em] leading-[1.2]',
-  h4: 'text-xl md:text-2xl font-semibold tracking-[-0.01em] leading-[1.3]',
+  h1: "text-5xl md:text-7xl font-bold tracking-[-0.02em] leading-[1.25]",
+  h2: "text-3xl md:text-5xl font-bold tracking-[-0.03em] leading-[1.28]",
+  h3: "text-2xl md:text-3xl font-semibold tracking-[-0.02em] leading-[1.25]",
+  h4: "text-xl md:text-2xl font-semibold tracking-[-0.01em] leading-[1.35]",
 };
 
 export function CursedHeading({
-  level = 'h1',
+  level = "h1",
   children,
-  animation = 'none',
+  animation = "none",
   className,
 }: CursedHeadingProps) {
   const baseClass = cn(
-    'font-display',
+    "font-display",
     sizeMap[level],
-    'text-[var(--cursed-fg)]',
-    className,
+    "text-[var(--cursed-fg)]",
+    className
   );
 
-  if (animation === 'blur-reveal') {
+  if (animation === "blur-reveal") {
     return (
       <BlurReveal
         as={level}
@@ -46,7 +46,7 @@ export function CursedHeading({
     );
   }
 
-  if (animation === 'shimmer') {
+  if (animation === "shimmer") {
     const Tag = level;
     return (
       <Tag className={baseClass}>
