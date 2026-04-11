@@ -27,8 +27,8 @@
   --cursed-primary: #26366b;
   --cursed-primary-hover: #354a8e;
   --cursed-primary-muted: rgba(38, 54, 107, 0.18);
-  --cursed-secondary: #26366b;
-  --cursed-secondary-hover: #354a8e;
+  --cursed-secondary: #a1c1e3;
+  --cursed-secondary-hover: #b7d0ee;
   --cursed-accent: #a1c1e3;
   --cursed-accent-muted: rgba(161, 193, 227, 0.12);
   --cursed-highlight: #ecdc87;
@@ -70,7 +70,7 @@
   --radius: 0.5rem;
 
   --chart-1: #26366b;
-  --chart-2: #26366b;
+  --chart-2: #e84c2e;
   --chart-3: #a1c1e3;
   --chart-4: #ecdc87;
   --chart-5: #4a4d56;
@@ -99,8 +99,8 @@
   --cursed-primary: #26366b;
   --cursed-primary-hover: #354a8e;
   --cursed-primary-muted: rgba(38, 54, 107, 0.18);
-  --cursed-secondary: #26366b;
-  --cursed-secondary-hover: #354a8e;
+  --cursed-secondary: #a1c1e3;
+  --cursed-secondary-hover: #b7d0ee;
   --cursed-accent: #a1c1e3;
   --cursed-accent-muted: rgba(161, 193, 227, 0.12);
   --cursed-highlight: #ecdc87;
