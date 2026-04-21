@@ -1,6 +1,12 @@
 "use client";
 
-import { useRef, useEffect, useMemo, useState, type CSSProperties } from "react";
+import {
+  useRef,
+  useEffect,
+  useMemo,
+  useState,
+  type CSSProperties,
+} from "react";
 
 type PatternShape = "Checks" | "Stripes" | "Edge";
 
@@ -162,6 +168,7 @@ interface AnimatedGradientProps {
   config?: GradientConfig;
   noise?: NoiseConfig;
   radius?: string;
+  animate?: boolean;
   style?: CSSProperties;
   className?: string;
 }
@@ -170,6 +177,7 @@ export default function AnimatedGradient({
   config = { preset: "Prism" },
   noise,
   radius = "0px",
+  animate = true,
   style,
   className,
 }: AnimatedGradientProps) {
@@ -282,6 +290,10 @@ export default function AnimatedGradient({
       canvas.style.width = `${width}px`;
       canvas.style.height = `${height}px`;
       gl.viewport(0, 0, canvas.width, canvas.height);
+
+      if (!animate || params.speed <= 0) {
+        renderFrame(0);
+      }
     };
 
     resize();
@@ -290,11 +302,12 @@ export default function AnimatedGradient({
 
     startTimeRef.current = performance.now();
 
-    const animate = (time: number) => {
-      const elapsed = (time - startTimeRef.current) / 1000;
+    const renderFrame = (elapsedSeconds: number) => {
       const speed = (params.speed / 100) * 5;
-
-      gl.uniform1f(uniforms.u_time, elapsed * speed + params.offset * 0.01);
+      gl.uniform1f(
+        uniforms.u_time,
+        elapsedSeconds * speed + params.offset * 0.01
+      );
       gl.uniform2f(uniforms.u_resolution, canvas.width, canvas.height);
       gl.uniform1f(uniforms.u_pixelRatio, window.devicePixelRatio || 1);
       gl.uniform1f(uniforms.u_scale, params.scale);
@@ -319,10 +332,19 @@ export default function AnimatedGradient({
       );
 
       gl.drawArrays(gl.TRIANGLES, 0, 6);
-      frameIdRef.current = requestAnimationFrame(animate);
     };
 
-    frameIdRef.current = requestAnimationFrame(animate);
+    const renderAnimatedFrame = (time: number) => {
+      const elapsed = (time - startTimeRef.current) / 1000;
+      renderFrame(elapsed);
+      frameIdRef.current = requestAnimationFrame(renderAnimatedFrame);
+    };
+
+    if (animate && params.speed > 0) {
+      frameIdRef.current = requestAnimationFrame(renderAnimatedFrame);
+    } else {
+      renderFrame(0);
+    }
 
     return () => {
       if (frameIdRef.current !== undefined) {
@@ -334,7 +356,7 @@ export default function AnimatedGradient({
       gl.deleteShader(fragmentShader);
       gl.deleteBuffer(positionBuffer);
     };
-  }, [isMounted, params]);
+  }, [animate, isMounted, params]);
 
   return (
     <div

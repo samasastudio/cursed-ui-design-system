@@ -84,6 +84,7 @@ export function CursedBackground({
               shape: "Edge",
               shapeSize: 42,
             }}
+            animate={!prefersReducedMotion}
             noise={{ opacity: 0.03 }}
             style={{ zIndex: 0 }}
             className="w-full h-full"

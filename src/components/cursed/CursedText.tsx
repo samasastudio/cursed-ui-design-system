@@ -29,6 +29,10 @@ export function CursedText({
   const baseClass = cn(variantMap[variant], className);
 
   if (animation === "slide-up") {
+    if (typeof children !== "string") {
+      return <p className={baseClass}>{children}</p>;
+    }
+
     return (
       <SlideUpText className={baseClass} stagger={0.06} delay={0.2} inView once>
         {children}
