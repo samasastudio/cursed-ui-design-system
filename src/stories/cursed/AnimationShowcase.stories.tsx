@@ -1,31 +1,34 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import React from 'react';
-import { CursedHeading } from '@/components/cursed/CursedHeading';
-import { CursedText } from '@/components/cursed/CursedText';
-import { CursedBackground } from '@/components/cursed/CursedBackground';
-import { CursedButton } from '@/components/cursed/CursedButton';
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import React from "react";
+import { CursedHeading } from "@/components/cursed/CursedHeading";
+import { CursedText } from "@/components/cursed/CursedText";
+import { CursedBackground } from "@/components/cursed/CursedBackground";
+import { CursedButton } from "@/components/cursed/CursedButton";
 
 const meta: Meta = {
-  title: 'Cursed UI/Animation Showcase',
+  title: "Cursed UI/Animation Showcase",
   parameters: {
-    layout: 'fullscreen',
+    layout: "fullscreen",
   },
 };
 export default meta;
 
 function GradientScene() {
   return (
-    <CursedBackground variant="gradient" className="min-h-[500px] flex items-center justify-center p-12">
+    <CursedBackground
+      variant="gradient"
+      className="min-h-[500px] flex items-center justify-center p-12"
+    >
       <div className="text-center space-y-6 max-w-2xl">
         <CursedHeading level="h1" animation="blur-reveal">
-          The Ritual Begins
+          Motion System
         </CursedHeading>
         <CursedText variant="body" animation="slide-up">
-          Animated gradient background powered by WebGL shaders,
-          themed to match each palette's gradient stops.
+          Animated gradient background powered by WebGL shaders, tuned for a
+          slower, meditative cadence across every theme.
         </CursedText>
         <div className="pt-4">
-          <CursedButton variant="primary">Enter the Void</CursedButton>
+          <CursedButton variant="primary">Review Motion</CursedButton>
         </div>
       </div>
     </CursedBackground>
@@ -34,17 +37,20 @@ function GradientScene() {
 
 function OrbScene() {
   return (
-    <CursedBackground variant="orbs" className="min-h-[500px] flex items-center justify-center p-12">
+    <CursedBackground
+      variant="orbs"
+      className="min-h-[500px] flex items-center justify-center p-12"
+    >
       <div className="text-center space-y-6 max-w-2xl">
         <CursedHeading level="h2" animation="shimmer">
-          Floating Orbs
+          Orb Field
         </CursedHeading>
         <CursedText variant="body">
-          CSS-only floating orbs that drift meditatively across the background.
-          Each orb uses the theme's gradient colors with heavy blur.
+          CSS-only color fields drift across the scene with restrained blur and
+          long timing curves.
         </CursedText>
         <CursedText variant="mono" animation="terminal">
-          signal acquired from /dev/spectral
+          pacing profile: meditative with reduced-motion fallback
         </CursedText>
       </div>
     </CursedBackground>
@@ -53,20 +59,24 @@ function OrbScene() {
 
 function MinimalScene() {
   return (
-    <CursedBackground variant="minimal" className="min-h-[400px] flex items-center justify-center p-12">
+    <CursedBackground
+      variant="minimal"
+      className="min-h-[400px] flex items-center justify-center p-12"
+    >
       <div className="text-center space-y-6 max-w-2xl">
         <CursedHeading level="h2" animation="blur-reveal">
           Minimal Grid
         </CursedHeading>
         <CursedText variant="caption">
-          A subtle dot matrix pattern for quieter moments. The grid breathes with the theme.
+          A subtle dot matrix pattern for low-noise moments and legible
+          contrast.
         </CursedText>
       </div>
     </CursedBackground>
   );
 }
 
-function FullShowcase() {
+function FullShowcaseView() {
   return (
     <div className="bg-[var(--cursed-bg)]">
       <GradientScene />
@@ -90,7 +100,7 @@ export const MinimalGrid: StoryObj = {
   render: () => <MinimalScene />,
 };
 
-export const FullShowcase_: StoryObj = {
-  name: 'Full Showcase',
-  render: () => <FullShowcase />,
+export const FullShowcase: StoryObj = {
+  name: "Full Showcase",
+  render: () => <FullShowcaseView />,
 };

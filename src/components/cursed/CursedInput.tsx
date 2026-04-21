@@ -1,41 +1,47 @@
-import React from 'react';
-import { cn } from '@/lib/utils';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
+import React from "react";
+import { cn } from "@/lib/utils";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import { AnimatedCheckbox } from '@/components/animated-checkbox';
+} from "@/components/ui/select";
+import { AnimatedCheckbox } from "@/components/animated-checkbox";
 
 const cursedInputBase = [
-  'bg-[var(--cursed-bg-surface)]',
-  'border-[var(--cursed-border)]',
-  'text-[var(--cursed-fg)]',
-  'placeholder:text-[var(--cursed-fg-faint)]',
-  'font-body',
-  'focus:border-[var(--cursed-primary)]',
-  'focus:ring-1',
-  'focus:ring-[var(--cursed-ring)]',
-  'transition-all duration-300',
-].join(' ');
+  "bg-[var(--cursed-bg-surface)]",
+  "border-[var(--cursed-border)]",
+  "text-[var(--cursed-fg)]",
+  "text-[0.95rem] leading-[1.5]",
+  "placeholder:text-[var(--cursed-fg-faint)]",
+  "font-body",
+  "focus:border-[var(--cursed-primary)]",
+  "focus:ring-1",
+  "focus:ring-[var(--cursed-ring)]",
+  "transition-all duration-300",
+].join(" ");
+
+const cursedLabelBase =
+  "font-body text-xs font-semibold uppercase tracking-[0.11em] text-[var(--cursed-fg-muted)]";
 
 interface CursedInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
 }
 
-export function CursedInput({ label, className, id, ...props }: CursedInputProps) {
-  const inputId = id || label?.toLowerCase().replace(/\s+/g, '-');
+export function CursedInput({
+  label,
+  className,
+  id,
+  ...props
+}: CursedInputProps) {
+  const inputId = id || label?.toLowerCase().replace(/\s+/g, "-");
   return (
     <div className="space-y-2">
       {label && (
-        <label
-          htmlFor={inputId}
-          className="font-body text-xs font-medium uppercase tracking-[0.08em] text-[var(--cursed-fg-muted)]"
-        >
+        <label htmlFor={inputId} className={cursedLabelBase}>
           {label}
         </label>
       )}
@@ -52,21 +58,23 @@ interface CursedTextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaE
   label?: string;
 }
 
-export function CursedTextarea({ label, className, id, ...props }: CursedTextareaProps) {
-  const textareaId = id || label?.toLowerCase().replace(/\s+/g, '-');
+export function CursedTextarea({
+  label,
+  className,
+  id,
+  ...props
+}: CursedTextareaProps) {
+  const textareaId = id || label?.toLowerCase().replace(/\s+/g, "-");
   return (
     <div className="space-y-2">
       {label && (
-        <label
-          htmlFor={textareaId}
-          className="font-body text-xs font-medium uppercase tracking-[0.08em] text-[var(--cursed-fg-muted)]"
-        >
+        <label htmlFor={textareaId} className={cursedLabelBase}>
           {label}
         </label>
       )}
       <Textarea
         id={textareaId}
-        className={cn(cursedInputBase, 'min-h-[100px] resize-none', className)}
+        className={cn(cursedInputBase, "min-h-[100px] resize-none", className)}
         {...props}
       />
     </div>
@@ -89,21 +97,38 @@ interface CursedSelectProps {
 
 export function CursedSelect({
   label,
-  placeholder = 'Select...',
+  placeholder = "Select...",
   options,
   value,
   onValueChange,
   className,
 }: CursedSelectProps) {
+  const triggerId = React.useId();
+  const labelId = React.useId();
+
+  const handleValueChange = React.useCallback(
+    (nextValue: string | null) => {
+      if (nextValue) {
+        onValueChange?.(nextValue);
+      }
+    },
+    [onValueChange]
+  );
+
   return (
     <div className="space-y-2">
       {label && (
-        <label className="font-body text-xs font-medium uppercase tracking-[0.08em] text-[var(--cursed-fg-muted)]">
+        <label id={labelId} htmlFor={triggerId} className={cursedLabelBase}>
           {label}
         </label>
       )}
-      <Select value={value} onValueChange={onValueChange}>
-        <SelectTrigger className={cn(cursedInputBase, className)}>
+      <Select value={value} onValueChange={handleValueChange}>
+        <SelectTrigger
+          id={triggerId}
+          aria-labelledby={label ? labelId : undefined}
+          aria-label={label ? undefined : placeholder}
+          className={cn(cursedInputBase, className)}
+        >
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
         <SelectContent className="bg-[var(--cursed-bg-elevated)] border-[var(--cursed-border)] text-[var(--cursed-fg)]">
@@ -141,7 +166,7 @@ export function CursedCheckbox({
       title={label}
       defaultChecked={defaultChecked}
       onCheckedChange={onCheckedChange}
-      className={cn('text-[var(--cursed-fg)]', className)}
+      className={cn("text-[var(--cursed-fg)]", className)}
     />
   );
 }

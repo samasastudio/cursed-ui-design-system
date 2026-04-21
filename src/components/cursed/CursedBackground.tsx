@@ -1,4 +1,5 @@
 import React from "react";
+import { useReducedMotion } from "motion/react";
 import { cn } from "@/lib/utils";
 import AnimatedGradient from "@/components/animated-gradient";
 
@@ -13,6 +14,49 @@ export function CursedBackground({
   className,
   variant = "gradient",
 }: CursedBackgroundProps) {
+  const prefersReducedMotion = useReducedMotion();
+  const [gradientColors, setGradientColors] = React.useState({
+    color1: "#26366b",
+    color2: "#e84c2e",
+    color3: "#ecdc87",
+  });
+
+  React.useEffect(() => {
+    if (typeof document === "undefined") return;
+
+    const root = document.documentElement;
+
+    const syncGradientColors = () => {
+      const computed = getComputedStyle(root);
+      const color1 = computed.getPropertyValue("--cursed-gradient-1").trim();
+      const color2 = computed.getPropertyValue("--cursed-gradient-2").trim();
+      const color3 = computed.getPropertyValue("--cursed-gradient-3").trim();
+
+      if (!color1 || !color2 || !color3) return;
+
+      setGradientColors((prev) => {
+        if (
+          prev.color1 === color1 &&
+          prev.color2 === color2 &&
+          prev.color3 === color3
+        ) {
+          return prev;
+        }
+        return { color1, color2, color3 };
+      });
+    };
+
+    syncGradientColors();
+
+    const observer = new MutationObserver(syncGradientColors);
+    observer.observe(root, {
+      attributes: true,
+      attributeFilter: ["data-theme", "data-mode", "style", "class"],
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div
       className={cn(
@@ -25,20 +69,24 @@ export function CursedBackground({
           <AnimatedGradient
             config={{
               preset: "custom",
-              color1: "var(--cursed-gradient-1)",
-              color2: "var(--cursed-gradient-2)",
-              color3: "var(--cursed-gradient-3)",
-              speed: 0.3,
-              distortion: 0.4,
-              swirl: 0.6,
-              swirlIterations: 4,
-              softness: 0.8,
-              scale: 1.2,
+              color1: gradientColors.color1,
+              color2: gradientColors.color2,
+              color3: gradientColors.color3,
+              speed: prefersReducedMotion ? 0 : 16,
+              distortion: 8,
+              swirl: 48,
+              swirlIterations: 7,
+              softness: 92,
+              scale: 0.55,
               rotation: 0,
-              proportion: 0.5,
+              proportion: 46,
               offset: 0,
+              shape: "Edge",
+              shapeSize: 42,
             }}
+            animate={!prefersReducedMotion}
             noise={{ opacity: 0.03 }}
+            style={{ zIndex: 0 }}
             className="w-full h-full"
           />
         </div>

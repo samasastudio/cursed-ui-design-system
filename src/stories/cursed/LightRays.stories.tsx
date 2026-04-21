@@ -27,7 +27,7 @@ function RaysStage({
         <span
           className="text-xs font-mono tracking-widest uppercase"
           style={{
-            color: "rgba(255,255,255,0.4)",
+            color: "var(--cursed-fg-muted)",
             fontFamily: "var(--cursed-font-mono)",
           }}
         >
@@ -55,9 +55,9 @@ export const Default: StoryObj = {
    ----------------------------------------------------------------------- */
 
 export const ShrineSunsetRays: StoryObj = {
-  name: "Shrine / Sunset Rays",
+  name: "Shrine / Balanced Rays",
   render: () => (
-    <RaysStage label="Shrine — Sunset Rays">
+    <RaysStage label="Shrine — balanced rays">
       <Rays
         backgroundColor="#0b0d11"
         raysColor={{ mode: "multi", color1: "#e84c2e", color2: "#ecdc87" }}
@@ -72,9 +72,9 @@ export const ShrineSunsetRays: StoryObj = {
 };
 
 export const ShadowNeonRays: StoryObj = {
-  name: "Shadow / Neon Rays",
+  name: "Shadow / High Contrast Rays",
   render: () => (
-    <RaysStage label="Shadow — Neon Rays">
+    <RaysStage label="Shadow — high contrast rays">
       <Rays
         backgroundColor="#050505"
         raysColor={{ mode: "multi", color1: "#ff4e00", color2: "#7b3fe4" }}
@@ -89,9 +89,9 @@ export const ShadowNeonRays: StoryObj = {
 };
 
 export const VoidCosmicRays: StoryObj = {
-  name: "Void / Cosmic Rays",
+  name: "Void / Luminous Rays",
   render: () => (
-    <RaysStage label="Void — Cosmic Rays">
+    <RaysStage label="Void — luminous rays">
       <Rays
         backgroundColor="#030304"
         raysColor={{ mode: "multi", color1: "#4d6cfa", color2: "#c44aef" }}

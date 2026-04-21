@@ -1,10 +1,10 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import React from 'react';
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import React from "react";
 
 const meta: Meta = {
-  title: 'Cursed UI/Color Tokens',
+  title: "Cursed UI/Color Tokens",
   parameters: {
-    layout: 'padded',
+    layout: "padded",
   },
 };
 export default meta;
@@ -18,7 +18,9 @@ function Swatch({ name, cssVar }: { name: string; cssVar: string }) {
       />
       <div>
         <div className="font-mono text-sm text-[var(--cursed-fg)]">{name}</div>
-        <div className="font-mono text-xs text-[var(--cursed-fg-faint)]">{cssVar}</div>
+        <div className="font-mono text-xs text-[var(--cursed-fg-faint)]">
+          {cssVar}
+        </div>
       </div>
     </div>
   );
@@ -38,37 +40,37 @@ function GradientBar() {
 function TokenGrid() {
   const groups = [
     {
-      label: 'Background',
+      label: "Background",
       tokens: [
-        { name: 'Background', var: '--cursed-bg' },
-        { name: 'Elevated', var: '--cursed-bg-elevated' },
-        { name: 'Surface', var: '--cursed-bg-surface' },
+        { name: "Background", var: "--cursed-bg" },
+        { name: "Elevated", var: "--cursed-bg-elevated" },
+        { name: "Surface", var: "--cursed-bg-surface" },
       ],
     },
     {
-      label: 'Foreground',
+      label: "Foreground",
       tokens: [
-        { name: 'Default', var: '--cursed-fg' },
-        { name: 'Muted', var: '--cursed-fg-muted' },
-        { name: 'Faint', var: '--cursed-fg-faint' },
+        { name: "Default", var: "--cursed-fg" },
+        { name: "Muted", var: "--cursed-fg-muted" },
+        { name: "Faint", var: "--cursed-fg-faint" },
       ],
     },
     {
-      label: 'Brand',
+      label: "Brand",
       tokens: [
-        { name: 'Primary', var: '--cursed-primary' },
-        { name: 'Primary Hover', var: '--cursed-primary-hover' },
-        { name: 'Secondary', var: '--cursed-secondary' },
-        { name: 'Accent', var: '--cursed-accent' },
-        { name: 'Destructive', var: '--cursed-destructive' },
+        { name: "Primary", var: "--cursed-primary" },
+        { name: "Primary Hover", var: "--cursed-primary-hover" },
+        { name: "Secondary", var: "--cursed-secondary" },
+        { name: "Accent", var: "--cursed-accent" },
+        { name: "Destructive", var: "--cursed-destructive" },
       ],
     },
     {
-      label: 'Gradient',
+      label: "Gradient",
       tokens: [
-        { name: 'Stop 1', var: '--cursed-gradient-1' },
-        { name: 'Stop 2', var: '--cursed-gradient-2' },
-        { name: 'Stop 3', var: '--cursed-gradient-3' },
+        { name: "Stop 1", var: "--cursed-gradient-1" },
+        { name: "Stop 2", var: "--cursed-gradient-2" },
+        { name: "Stop 3", var: "--cursed-gradient-3" },
       ],
     },
   ];
@@ -76,7 +78,9 @@ function TokenGrid() {
   return (
     <div className="p-8 space-y-10 bg-[var(--cursed-bg)] min-h-screen">
       <div>
-        <h2 className="font-display text-3xl text-[var(--cursed-fg)] mb-2">Color Tokens</h2>
+        <h2 className="font-display text-3xl text-[var(--cursed-fg)] mb-2">
+          Color Tokens
+        </h2>
         <p className="font-body text-sm text-[var(--cursed-fg-muted)] mb-6">
           Switch themes in the toolbar to see each palette.
         </p>
@@ -85,7 +89,7 @@ function TokenGrid() {
 
       {groups.map((group) => (
         <div key={group.label}>
-          <h3 className="font-body text-xs font-medium uppercase tracking-[0.1em] text-[var(--cursed-fg-muted)] mb-4">
+          <h3 className="font-body text-xs font-semibold uppercase tracking-[0.11em] text-[var(--cursed-fg-muted)] mb-4">
             {group.label}
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">

@@ -26,9 +26,14 @@ function IntroPage() {
           <CursedHeading level="h1" animation="blur-reveal">
             Cursed UI
           </CursedHeading>
-          <CursedText variant="body" animation="slide-up">
-            A digital-occult design system built on Spell UI primitives.
-            Meditative. Cosmic. Slightly wrong.
+          <CursedText
+            variant="body"
+            animation="slide-up"
+            className="max-w-[68ch]"
+          >
+            A liminal component system built on reusable primitives.
+            Purposefully atmospheric, but optimized for clarity, consistency,
+            and production use.
           </CursedText>
         </div>
 
@@ -83,13 +88,13 @@ function IntroPage() {
         </div>
 
         {/* Aesthetic note */}
-        <div className="border-l-2 border-[var(--cursed-primary)] pl-6 space-y-2">
+        <div className="rounded-xl border border-[var(--cursed-border)] bg-[var(--cursed-bg-surface)] px-5 py-4 space-y-2">
           <CursedText variant="mono" animation="terminal">
-            aesthetic: digital occult
+            aesthetic: liminal phantasmic whimsical
           </CursedText>
           <CursedText variant="caption">
-            Dandadan-inspired cosmic weirdness. Meditative, slow-floating,
-            beautiful and slightly wrong.
+            The guiding rule is restraint: subtle tension, elegant composition,
+            and system behavior that reads clearly at first glance.
           </CursedText>
         </div>
       </div>

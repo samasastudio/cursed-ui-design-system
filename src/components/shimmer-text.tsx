@@ -1,7 +1,6 @@
 "use client";
 
-import type { CSSProperties } from "react";
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import { cn } from "@/lib/utils";
 
 type Variant =
@@ -65,36 +64,27 @@ export function ShimmerText({
   duration = 1.5,
   delay = 1.5,
 }: ShimmerTextProps) {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
     <motion.span
       className={cn(
-        "inline-block min-w-0 align-middle py-[0.2em] leading-[1.45] [--shimmer-contrast:rgba(255,255,255,0.6)] dark:[--shimmer-contrast:rgba(0,0,0,0.5)]",
+        "inline-block min-w-0 align-baseline will-change-transform",
         variantMap[variant],
         className
       )}
-      style={
-        {
-          WebkitTextFillColor: "transparent",
-          background:
-            "currentColor linear-gradient(to right, currentColor 0%, var(--shimmer-contrast) 40%, var(--shimmer-contrast) 60%, currentColor 100%)",
-          WebkitBackgroundClip: "text",
-          backgroundClip: "text",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "50% 200%",
-        } as CSSProperties
-      }
-      initial={{
-        backgroundPositionX: "250%",
-      }}
+      style={{ lineHeight: "inherit" }}
+      initial={{ opacity: 0.92, y: 0 }}
       animate={{
-        backgroundPositionX: ["-100%", "250%"],
+        opacity: prefersReducedMotion ? 1 : [0.92, 1, 0.94],
+        y: prefersReducedMotion ? 0 : [0, -1, 0],
       }}
       transition={{
-        duration: duration,
+        duration: prefersReducedMotion ? 0.01 : duration,
         delay: delay,
-        repeat: Infinity,
-        repeatDelay: 1.5,
-        ease: "linear",
+        repeat: prefersReducedMotion ? 0 : Infinity,
+        repeatDelay: 1.2,
+        ease: [0.4, 0, 0.2, 1],
       }}
     >
       {children}
