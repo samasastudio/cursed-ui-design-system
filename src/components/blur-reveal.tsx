@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import type React from "react";
 
 export interface BlurRevealProps {
@@ -32,6 +32,7 @@ export function BlurReveal({
   once = true,
   letterSpacing,
 }: BlurRevealProps) {
+  const prefersReducedMotion = useReducedMotion();
   const MotionTag = motion[as as keyof typeof motion] as typeof motion.div;
 
   const stagger = 0.03 / speedReveal;
@@ -58,23 +59,27 @@ export function BlurReveal({
     hidden: { opacity: 0, filter: "blur(12px)", y: 10 },
     visible: {
       opacity: 1,
-      filter: "blur(0px)",
+      filter: prefersReducedMotion ? "none" : "blur(0px)",
       y: 0,
       transition: {
-        duration: baseDuration,
+        duration: prefersReducedMotion ? 0.01 : baseDuration,
       },
     },
-    exit: { opacity: 0, filter: "blur(12px)", y: 10 },
+    exit: {
+      opacity: 0,
+      filter: prefersReducedMotion ? "none" : "blur(12px)",
+      y: prefersReducedMotion ? 0 : 10,
+    },
   };
 
   return (
     <AnimatePresence mode="popLayout">
       {trigger && (
         <MotionTag
-          initial="hidden"
+          initial={prefersReducedMotion ? false : "hidden"}
           whileInView={inView ? "visible" : undefined}
           animate={inView ? undefined : "visible"}
-          exit="exit"
+          exit={prefersReducedMotion ? undefined : "exit"}
           variants={containerVariants}
           viewport={{ once }}
           className={className}

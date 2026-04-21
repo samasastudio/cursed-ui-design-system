@@ -7,12 +7,13 @@
 
 /* ============================================================================
    CURSED UI — Digital Occult Design System
-   Three themes: Shrine (sunset ritual), Shadow (neon grimoire), Void (cosmic pulse)
+   Three themes with light/dark parity:
+   Shrine (amber dusk), Shadow (velvet noir), Void (astral drift)
    Fonts loaded via <link> tags in .storybook/preview-head.html
    ============================================================================ */
 
 /* ============================================================================
-   DEFAULT / SHRINE — Sunset Ritual
+   DEFAULT / SHRINE — Amber Dusk
    ============================================================================ */
 :root {
   /* Cursed UI tokens
@@ -86,7 +87,7 @@
 }
 
 /* ============================================================================
-   SHRINE — Sunset Ritual (explicit selector)
+   SHRINE — Amber Dusk (explicit selector)
    ============================================================================ */
 [data-theme="shrine"] {
   --cursed-bg: #0b0d11;
@@ -139,8 +140,56 @@
   --ring: rgba(38, 54, 107, 0.4);
 }
 
+[data-mode="light"][data-theme="shrine"] {
+  --cursed-bg: #f4f0e8;
+  --cursed-bg-elevated: #fdf9f1;
+  --cursed-bg-surface: #ece4d8;
+  --cursed-bg-overlay: rgba(244, 240, 232, 0.9);
+  --cursed-fg: #241f1d;
+  --cursed-fg-muted: #625a53;
+  --cursed-fg-faint: #8f857d;
+  --cursed-primary: #415a9b;
+  --cursed-primary-hover: #354c85;
+  --cursed-primary-muted: rgba(65, 90, 155, 0.14);
+  --cursed-secondary: #b07456;
+  --cursed-secondary-hover: #965f45;
+  --cursed-accent: #c59063;
+  --cursed-accent-muted: rgba(197, 144, 99, 0.14);
+  --cursed-highlight: #e2b875;
+  --cursed-highlight-muted: rgba(226, 184, 117, 0.16);
+  --cursed-destructive: #b1483a;
+  --cursed-border: rgba(65, 90, 155, 0.2);
+  --cursed-border-hover: rgba(65, 90, 155, 0.35);
+  --cursed-ring: rgba(65, 90, 155, 0.35);
+  --cursed-gradient-1: #5a6fa8;
+  --cursed-gradient-2: #cb8762;
+  --cursed-gradient-3: #e5c18a;
+  --cursed-glow:
+    0 0 30px rgba(65, 90, 155, 0.12), 0 0 60px rgba(197, 144, 99, 0.1);
+  --cursed-shadow: 0 8px 24px rgba(47, 38, 29, 0.14);
+
+  --background: #f4f0e8;
+  --foreground: #241f1d;
+  --card: #fdf9f1;
+  --card-foreground: #241f1d;
+  --popover: #fdf9f1;
+  --popover-foreground: #241f1d;
+  --primary: #415a9b;
+  --primary-foreground: #f8f2e8;
+  --secondary: #ece4d8;
+  --secondary-foreground: #312a26;
+  --muted: #ece4d8;
+  --muted-foreground: #625a53;
+  --accent: #c59063;
+  --accent-foreground: #1f1a18;
+  --destructive: #b1483a;
+  --border: rgba(65, 90, 155, 0.2);
+  --input: rgba(65, 90, 155, 0.16);
+  --ring: rgba(65, 90, 155, 0.35);
+}
+
 /* ============================================================================
-   SHADOW — Neon Grimoire
+   SHADOW — Velvet Noir
    ============================================================================ */
 [data-theme="shadow"] {
   --cursed-bg: #050505;
@@ -148,8 +197,8 @@
   --cursed-bg-surface: #161616;
   --cursed-bg-overlay: rgba(5, 5, 5, 0.88);
   --cursed-fg: #e3e3e1;
-  --cursed-fg-muted: #8a8a88;
-  --cursed-fg-faint: #4a4a48;
+  --cursed-fg-muted: #9f9aa8;
+  --cursed-fg-faint: #645d70;
   --cursed-primary: #7b3fe4;
   --cursed-primary-hover: #9462ec;
   --cursed-primary-muted: rgba(123, 63, 228, 0.16);
@@ -165,7 +214,7 @@
   --cursed-gradient-2: #4415b4;
   --cursed-gradient-3: #7b3fe4;
   --cursed-font-display: "Aoboshi One", serif;
-  --cursed-font-body: "Aoboshi One", serif;
+  --cursed-font-body: "Manrope", sans-serif;
   --cursed-font-mono: "JetBrains Mono", monospace;
   --cursed-glow:
     0 0 40px rgba(123, 63, 228, 0.18), 0 0 80px rgba(68, 21, 180, 0.1);
@@ -191,8 +240,56 @@
   --ring: rgba(123, 63, 228, 0.4);
 }
 
+[data-mode="light"][data-theme="shadow"] {
+  --cursed-bg: #f6f2f8;
+  --cursed-bg-elevated: #fcf9fd;
+  --cursed-bg-surface: #ede6f2;
+  --cursed-bg-overlay: rgba(246, 242, 248, 0.9);
+  --cursed-fg: #221a2a;
+  --cursed-fg-muted: #55495f;
+  --cursed-fg-faint: #7c6f88;
+  --cursed-primary: #6a43ba;
+  --cursed-primary-hover: #5a359f;
+  --cursed-primary-muted: rgba(106, 67, 186, 0.16);
+  --cursed-secondary: #9b5fca;
+  --cursed-secondary-hover: #844cb1;
+  --cursed-accent: #b86db5;
+  --cursed-accent-muted: rgba(184, 109, 181, 0.14);
+  --cursed-destructive: #b24353;
+  --cursed-border: rgba(106, 67, 186, 0.2);
+  --cursed-border-hover: rgba(106, 67, 186, 0.33);
+  --cursed-ring: rgba(106, 67, 186, 0.35);
+  --cursed-gradient-1: #b8735d;
+  --cursed-gradient-2: #7a48c4;
+  --cursed-gradient-3: #ae66d6;
+  --cursed-font-display: "Aoboshi One", serif;
+  --cursed-font-body: "Manrope", sans-serif;
+  --cursed-glow:
+    0 0 28px rgba(106, 67, 186, 0.12), 0 0 56px rgba(184, 109, 181, 0.09);
+  --cursed-shadow: 0 8px 24px rgba(43, 29, 56, 0.14);
+
+  --background: #f6f2f8;
+  --foreground: #221a2a;
+  --card: #fcf9fd;
+  --card-foreground: #221a2a;
+  --popover: #fcf9fd;
+  --popover-foreground: #221a2a;
+  --primary: #6a43ba;
+  --primary-foreground: #f9f4fe;
+  --secondary: #ede6f2;
+  --secondary-foreground: #2b2133;
+  --muted: #ede6f2;
+  --muted-foreground: #55495f;
+  --accent: #b86db5;
+  --accent-foreground: #251927;
+  --destructive: #b24353;
+  --border: rgba(106, 67, 186, 0.2);
+  --input: rgba(106, 67, 186, 0.14);
+  --ring: rgba(106, 67, 186, 0.35);
+}
+
 /* ============================================================================
-   VOID — Cosmic Pulse
+   VOID — Astral Drift
    Near-black base, spectrum gradient accent (navy→blue→purple→magenta→pink→coral)
    ============================================================================ */
 [data-theme="void"] {
@@ -249,6 +346,52 @@
   --border: rgba(230, 230, 232, 0.06);
   --input: rgba(230, 230, 232, 0.1);
   --ring: rgba(77, 108, 250, 0.4);
+}
+
+[data-mode="light"][data-theme="void"] {
+  --cursed-bg: #f1f3f8;
+  --cursed-bg-elevated: #f9fafe;
+  --cursed-bg-surface: #e6eaf4;
+  --cursed-bg-overlay: rgba(241, 243, 248, 0.9);
+  --cursed-fg: #1e2330;
+  --cursed-fg-muted: #57607a;
+  --cursed-fg-faint: #7f88a1;
+  --cursed-primary: #4865d6;
+  --cursed-primary-hover: #3d56b7;
+  --cursed-primary-muted: rgba(72, 101, 214, 0.16);
+  --cursed-secondary: #8f4dcf;
+  --cursed-secondary-hover: #7a3fb3;
+  --cursed-accent: #d26d78;
+  --cursed-accent-muted: rgba(210, 109, 120, 0.15);
+  --cursed-destructive: #b5454f;
+  --cursed-border: rgba(72, 101, 214, 0.2);
+  --cursed-border-hover: rgba(72, 101, 214, 0.33);
+  --cursed-ring: rgba(72, 101, 214, 0.35);
+  --cursed-gradient-1: #5a6fca;
+  --cursed-gradient-2: #a55ecf;
+  --cursed-gradient-3: #e0876f;
+  --cursed-glow:
+    0 0 28px rgba(72, 101, 214, 0.11), 0 0 56px rgba(165, 94, 207, 0.1);
+  --cursed-shadow: 0 8px 24px rgba(28, 34, 50, 0.14);
+
+  --background: #f1f3f8;
+  --foreground: #1e2330;
+  --card: #f9fafe;
+  --card-foreground: #1e2330;
+  --popover: #f9fafe;
+  --popover-foreground: #1e2330;
+  --primary: #4865d6;
+  --primary-foreground: #f6f8ff;
+  --secondary: #e6eaf4;
+  --secondary-foreground: #283048;
+  --muted: #e6eaf4;
+  --muted-foreground: #57607a;
+  --accent: #8f4dcf;
+  --accent-foreground: #f6f1ff;
+  --destructive: #b5454f;
+  --border: rgba(72, 101, 214, 0.2);
+  --input: rgba(72, 101, 214, 0.14);
+  --ring: rgba(72, 101, 214, 0.35);
 }
 
 /* ============================================================================
@@ -329,8 +472,18 @@
     background-color: var(--cursed-bg);
     color: var(--cursed-fg);
     font-family: var(--cursed-font-body);
+    font-kerning: normal;
+    font-feature-settings:
+      "liga" 1,
+      "calt" 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+  [data-mode="dark"] {
+    color-scheme: dark;
+  }
+  [data-mode="light"] {
+    color-scheme: light;
   }
 }
 
@@ -438,6 +591,17 @@
   animation: cursed-terminal-blink 1s step-end infinite;
   color: var(--cursed-primary);
   margin-left: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursed-float,
+  .cursed-drift,
+  .cursed-pulse,
+  .cursed-sigil,
+  .cursed-breathe,
+  .cursed-terminal-cursor::after {
+    animation: none !important;
+  }
 }
 
 /* ============================================================================

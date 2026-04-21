@@ -46,7 +46,7 @@ Each theme was derived from a branding reference image in the repo root (`Shrine
 
 ---
 
-### Shadow — Neon Grimoire
+### Shadow — Velvet Noir
 
 **Mood:** A spell book rendered on an OLED screen. Maximum contrast. The orange burns against true black. Purple hums underneath like ultraviolet light leaking through cracks.
 
@@ -62,7 +62,8 @@ Each theme was derived from a branding reference image in the repo root (`Shrine
 
 **Typography:**
 
-- **Display and body:** Aoboshi One — a Japanese-influenced serif with unusual stroke endings. It gives every word weight and ceremony. Using the same face for display and body creates a monastic, single-voice consistency.
+- **Display:** Aoboshi One — a Japanese-influenced serif with unusual stroke endings. It anchors headlines with ceremonial weight.
+- **Body:** Manrope — a neutral, modern sans that improves readability and system clarity at smaller sizes.
 - **Mono:** JetBrains Mono
 
 **Glow characteristic:** Orange is the dominant glow source with indigo bleeding in at the edges. High opacity falloff — glows are tight and concentrated, not diffuse.
@@ -177,8 +178,8 @@ All interactive state changes (hover, focus, active) use `transition-all duratio
 
 Headings use negative tracking that loosens with size:
 
-- H1: `-0.04em` — very tight, display-scale type needs compression
-- H2: `-0.03em`
+- H1: `-0.03em`
+- H2: `-0.025em`
 - H3: `-0.02em`
 - H4: `-0.01em`
 
@@ -189,9 +190,9 @@ Body text uses default or relaxed leading. Mono uses slightly negative tracking 
 All labels (form fields, metadata, navigation) use:
 
 - `text-xs` (12px)
-- `font-medium`
+- `font-semibold`
 - `uppercase`
-- `tracking-[0.08em]` — wide letter-spacing for legibility at small size
+- `tracking-[0.11em]` — wider letter-spacing for legibility at small size
 - `--cursed-fg-muted` color
 
 This creates a consistent "system voice" for metadata that contrasts with the expressive display type.

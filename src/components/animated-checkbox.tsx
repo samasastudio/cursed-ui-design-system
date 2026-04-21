@@ -1,7 +1,7 @@
 "use client";
 
-import { motion } from "motion/react";
-import { useState } from "react";
+import { motion, useReducedMotion } from "motion/react";
+import { type ChangeEvent, useId, useState } from "react";
 import { cn } from "@/lib/utils";
 
 interface AnimatedCheckboxProps {
@@ -14,7 +14,7 @@ interface AnimatedCheckboxProps {
 const springTransition = {
   type: "spring" as const,
   duration: 0.4,
-  bounce: 0.2,
+  bounce: 0,
 };
 
 export function AnimatedCheckbox({
@@ -23,22 +23,34 @@ export function AnimatedCheckbox({
   className,
   onCheckedChange,
 }: AnimatedCheckboxProps) {
+  const inputId = useId();
+  const prefersReducedMotion = useReducedMotion();
   const [checked, setChecked] = useState(defaultChecked);
 
-  const handleClick = () => {
-    const newChecked = !checked;
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const newChecked = event.target.checked;
     setChecked(newChecked);
     onCheckedChange?.(newChecked);
   };
 
   return (
-    <div
-      className={cn("flex items-center gap-3 cursor-pointer select-none", className)}
-      onClick={handleClick}
+    <label
+      htmlFor={inputId}
+      className={cn(
+        "flex items-center gap-3 cursor-pointer select-none",
+        className
+      )}
     >
+      <input
+        id={inputId}
+        type="checkbox"
+        checked={checked}
+        onChange={handleChange}
+        className="sr-only peer"
+      />
       <div
         className={cn(
-          "size-4.5 rounded-[6px] flex items-center justify-center border-[1.5px] transition-colors duration-200",
+          "size-4.5 rounded-[6px] flex items-center justify-center border-[1.5px] transition-colors duration-200 peer-focus-visible:ring-2 peer-focus-visible:ring-[var(--cursed-ring)] peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-[var(--cursed-bg)]",
           checked
             ? "bg-foreground border-transparent"
             : "bg-transparent border-muted-foreground/40 hover:border-muted-foreground/60"
@@ -53,14 +65,20 @@ export function AnimatedCheckbox({
             strokeLinecap="round"
             strokeLinejoin="round"
             transform="translate(5 6)"
-            initial={{ pathLength: defaultChecked ? 1 : 0, opacity: defaultChecked ? 1 : 0 }}
+            initial={{
+              pathLength: defaultChecked ? 1 : 0,
+              opacity: defaultChecked ? 1 : 0,
+            }}
             animate={{
               pathLength: checked ? 1 : 0,
-              opacity: checked ? 1 : 0
+              opacity: checked ? 1 : 0,
             }}
             transition={{
-              pathLength: { ease: "easeOut", duration: 0.3 },
-              opacity: { duration: 0 }
+              pathLength: {
+                ease: "easeOut",
+                duration: prefersReducedMotion ? 0.01 : 0.3,
+              },
+              opacity: { duration: 0 },
             }}
           />
         </svg>
@@ -76,14 +94,19 @@ export function AnimatedCheckbox({
         </span>
         <motion.div
           className="absolute left-0 top-1/2 h-[1.5px] bg-muted-foreground -translate-y-1/2"
-          initial={{ width: defaultChecked ? "100%" : 0, opacity: defaultChecked ? 1 : 0 }}
+          initial={{
+            width: defaultChecked ? "100%" : 0,
+            opacity: defaultChecked ? 1 : 0,
+          }}
           animate={{
             width: checked ? "100%" : 0,
             opacity: checked ? 1 : 0,
           }}
-          transition={springTransition}
+          transition={
+            prefersReducedMotion ? { duration: 0.01 } : springTransition
+          }
         />
       </div>
-    </div>
+    </label>
   );
 }

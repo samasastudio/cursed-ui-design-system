@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimationOptions, motion } from "motion/react";
+import { AnimationOptions, motion, useReducedMotion } from "motion/react";
 import {
   forwardRef,
   useCallback,
@@ -39,6 +39,15 @@ interface WordObject {
   needsSpace: boolean;
 }
 
+type IntlWithSegmenter = typeof Intl & {
+  Segmenter?: new (
+    locales?: string | string[],
+    options?: { granularity: "grapheme" }
+  ) => {
+    segment(input: string): Iterable<{ segment: string }>;
+  };
+};
+
 const SlideUpText = forwardRef<SlideUpTextRef, SlideUpTextProps>(
   (
     {
@@ -62,16 +71,17 @@ const SlideUpText = forwardRef<SlideUpTextRef, SlideUpTextProps>(
       once = true,
       ...props
     },
-    ref,
+    ref
   ) => {
-    const text = typeof children === "string"
-      ? children
-      : children?.toString() || "";
+    const prefersReducedMotion = useReducedMotion();
+    const text =
+      typeof children === "string" ? children : children?.toString() || "";
     const [isAnimating, setIsAnimating] = useState(false);
 
     const splitIntoCharacters = (text: string): string[] => {
-      if (typeof Intl !== "undefined" && "Segmenter" in Intl) {
-        const segmenter = new Intl.Segmenter("en", { granularity: "grapheme" });
+      const segmenterCtor = (Intl as IntlWithSegmenter).Segmenter;
+      if (typeof Intl !== "undefined" && segmenterCtor) {
+        const segmenter = new segmenterCtor("en", { granularity: "grapheme" });
         return Array.from(segmenter.segment(text), ({ segment }) => segment);
       }
       return Array.from(text);
@@ -90,16 +100,17 @@ const SlideUpText = forwardRef<SlideUpTextRef, SlideUpTextProps>(
 
     const getStaggerDelay = useCallback(
       (index: number) => {
-        const total = split === "characters"
-          ? elements.reduce(
-            (acc, word) =>
-              acc +
-              (typeof word === "string"
-                ? 1
-                : word.characters.length + (word.needsSpace ? 1 : 0)),
-            0,
-          )
-          : elements.length;
+        const total =
+          split === "characters"
+            ? elements.reduce(
+                (acc, word) =>
+                  acc +
+                  (typeof word === "string"
+                    ? 1
+                    : word.characters.length + (word.needsSpace ? 1 : 0)),
+                0
+              )
+            : elements.length;
 
         if (from === "first") return index * stagger;
         if (from === "last") return (total - 1 - index) * stagger;
@@ -109,7 +120,7 @@ const SlideUpText = forwardRef<SlideUpTextRef, SlideUpTextProps>(
         }
         return index * stagger;
       },
-      [elements, from, stagger, split],
+      [elements, from, stagger, split]
     );
 
     const startAnimation = useCallback(() => {
@@ -129,12 +140,14 @@ const SlideUpText = forwardRef<SlideUpTextRef, SlideUpTextProps>(
     }, [autoStart, inView, startAnimation]);
 
     const variants = {
-      hidden: { y: "100%" },
+      hidden: { y: prefersReducedMotion ? "0%" : "100%" },
       visible: (i: number) => ({
         y: 0,
         transition: {
           ...transition,
-          delay: delay + ((transition?.delay as number) || 0) + getStaggerDelay(i),
+          duration: prefersReducedMotion ? 0.01 : transition?.duration,
+          delay:
+            delay + ((transition?.delay as number) || 0) + getStaggerDelay(i),
         },
       }),
     };
@@ -144,11 +157,19 @@ const SlideUpText = forwardRef<SlideUpTextRef, SlideUpTextProps>(
         className={cn(
           className,
           "flex flex-wrap whitespace-pre-wrap",
-          split === "lines" && "flex-col",
+          split === "lines" && "flex-col"
         )}
         initial="hidden"
         whileInView={inView ? "visible" : undefined}
-        animate={inView ? undefined : isAnimating ? "visible" : "hidden"}
+        animate={
+          prefersReducedMotion
+            ? "visible"
+            : inView
+              ? undefined
+              : isAnimating
+                ? "visible"
+                : "hidden"
+        }
         viewport={{ once }}
         onAnimationStart={() => {
           if (inView) {
@@ -163,61 +184,64 @@ const SlideUpText = forwardRef<SlideUpTextRef, SlideUpTextProps>(
         {(split === "characters"
           ? (elements as WordObject[])
           : (elements as string[]).map((el, i, arr) => ({
-            characters: [el],
-            needsSpace: split === "words" && i !== arr.length - 1,
-          }))).map((wordObj, wordIndex, array) => {
-            const previousCharsCount = array
-              .slice(0, wordIndex)
-              .reduce((sum, word) => sum + word.characters.length, 0);
+              characters: [el],
+              needsSpace: split === "words" && i !== arr.length - 1,
+            }))
+        ).map((wordObj, wordIndex, array) => {
+          const previousCharsCount = array
+            .slice(0, wordIndex)
+            .reduce((sum, word) => sum + word.characters.length, 0);
 
-            return (
-              <span
-                key={wordIndex}
-                aria-hidden="true"
-                className={cn("inline-flex overflow-hidden", wordClass)}
-              >
-                {wordObj.characters.map((char, charIndex) => (
-                  <span
-                    className={cn(
-                      charClass,
-                      "whitespace-pre-wrap relative overflow-hidden",
-                    )}
-                    key={charIndex}
-                  >
-                    <motion.span
-                      custom={previousCharsCount + charIndex}
-                      initial="hidden"
-                      animate={isAnimating ? "visible" : "hidden"}
-                      variants={variants}
-                      onAnimationComplete={wordIndex === array.length - 1 &&
-                          charIndex === wordObj.characters.length - 1
+          return (
+            <span
+              key={wordIndex}
+              aria-hidden="true"
+              className={cn("inline-flex overflow-hidden", wordClass)}
+            >
+              {wordObj.characters.map((char, charIndex) => (
+                <span
+                  className={cn(
+                    charClass,
+                    "whitespace-pre-wrap relative overflow-hidden"
+                  )}
+                  key={charIndex}
+                >
+                  <motion.span
+                    custom={previousCharsCount + charIndex}
+                    initial="hidden"
+                    animate={isAnimating ? "visible" : "hidden"}
+                    variants={variants}
+                    onAnimationComplete={
+                      wordIndex === array.length - 1 &&
+                      charIndex === wordObj.characters.length - 1
                         ? onComplete
-                        : undefined}
-                      className="inline-block"
-                    >
-                      {char}
-                    </motion.span>
-                  </span>
-                ))}
-                {wordObj.needsSpace && (
-                  <span className="relative overflow-hidden">
-                    <motion.span
-                      custom={previousCharsCount + wordObj.characters.length}
-                      initial="hidden"
-                      animate={isAnimating ? "visible" : "hidden"}
-                      variants={variants}
-                      className="inline-block"
-                    >
-                      {" "}
-                    </motion.span>
-                  </span>
-                )}
-              </span>
-            );
-          })}
+                        : undefined
+                    }
+                    className="inline-block"
+                  >
+                    {char}
+                  </motion.span>
+                </span>
+              ))}
+              {wordObj.needsSpace && (
+                <span className="relative overflow-hidden">
+                  <motion.span
+                    custom={previousCharsCount + wordObj.characters.length}
+                    initial="hidden"
+                    animate={isAnimating ? "visible" : "hidden"}
+                    variants={variants}
+                    className="inline-block"
+                  >
+                    {" "}
+                  </motion.span>
+                </span>
+              )}
+            </span>
+          );
+        })}
       </motion.span>
     );
-  },
+  }
 );
 
 SlideUpText.displayName = "SlideUpText";

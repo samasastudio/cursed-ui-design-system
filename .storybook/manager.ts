@@ -1,10 +1,11 @@
 import { addons, types } from "storybook/manager-api";
 import React from "react";
 
-import { THEMES, THEME_METADATA } from "../src/lib/themes";
+import { MODES, THEMES, THEME_METADATA } from "../src/lib/themes";
 
 const ADDON_ID = "cursed-ui-theme-switcher";
 const TOOL_ID = `${ADDON_ID}/tool`;
+const MODE_TOOL_ID = `${ADDON_ID}/mode-tool`;
 
 const themes = Object.values(THEME_METADATA);
 
@@ -49,10 +50,50 @@ function ThemeSwitcher() {
   );
 }
 
+function ModeSwitcher() {
+  const [mode, setMode] = React.useState<string>(MODES.DARK);
+
+  const toggleMode = React.useCallback(() => {
+    const nextMode = mode === MODES.DARK ? MODES.LIGHT : MODES.DARK;
+    setMode(nextMode);
+    const channel = addons.getChannel();
+    channel.emit("cursed-ui/mode-change", nextMode);
+  }, [mode]);
+
+  return React.createElement(
+    "button",
+    {
+      onClick: toggleMode,
+      title: `Current mode: ${mode} — Click to toggle`,
+      style: {
+        display: "flex",
+        alignItems: "center",
+        gap: "6px",
+        background: "none",
+        border: "none",
+        cursor: "pointer",
+        color: "inherit",
+        fontSize: "12px",
+        fontWeight: 600,
+        padding: "4px 8px",
+        borderRadius: "4px",
+        letterSpacing: "0.02em",
+        textTransform: "uppercase" as const,
+      },
+    },
+    mode === MODES.DARK ? "🌙 Dark" : "☀️ Light"
+  );
+}
+
 addons.register(ADDON_ID, () => {
   addons.add(TOOL_ID, {
     type: types.TOOL,
     title: "Cursed UI Theme",
     render: () => React.createElement(ThemeSwitcher),
+  });
+  addons.add(MODE_TOOL_ID, {
+    type: types.TOOL,
+    title: "Cursed UI Mode",
+    render: () => React.createElement(ModeSwitcher),
   });
 });

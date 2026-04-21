@@ -1,12 +1,12 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import React from 'react';
-import { CursedHeading } from '@/components/cursed/CursedHeading';
-import { CursedText } from '@/components/cursed/CursedText';
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import React from "react";
+import { CursedHeading } from "@/components/cursed/CursedHeading";
+import { CursedText } from "@/components/cursed/CursedText";
 
 const meta: Meta = {
-  title: 'Cursed UI/Typography',
+  title: "Cursed UI/Typography",
   parameters: {
-    layout: 'padded',
+    layout: "padded",
   },
 };
 export default meta;
@@ -16,27 +16,29 @@ function TypographySpecimen() {
     <div className="p-8 space-y-12 bg-[var(--cursed-bg)] min-h-screen max-w-3xl">
       <div className="space-y-6">
         <CursedText variant="label">Display Font — Headings</CursedText>
-        <CursedHeading level="h1">The Ritual Begins</CursedHeading>
-        <CursedHeading level="h2">Digital Occult Systems</CursedHeading>
-        <CursedHeading level="h3">Cosmic Transmissions</CursedHeading>
-        <CursedHeading level="h4">Signal From the Void</CursedHeading>
+        <CursedHeading level="h1">Theme Foundations</CursedHeading>
+        <CursedHeading level="h2">Atmosphere with Restraint</CursedHeading>
+        <CursedHeading level="h3">Hierarchy in Practice</CursedHeading>
+        <CursedHeading level="h4">Readable by Design</CursedHeading>
       </div>
 
       <div className="w-full h-px bg-[var(--cursed-border)]" />
 
       <div className="space-y-6">
         <CursedText variant="label">Body Font — Text Variants</CursedText>
-        <CursedText variant="body">
-          Body text. The cursed interface hums with meditative energy, each pixel a tiny sigil
-          inscribed by machines that dream in gradient. The terminal whispers — not warnings,
-          but invocations. Something is channeling through the design system.
+        <CursedText variant="body" className="max-w-[68ch]">
+          Body text should stay calm and direct. The voice can carry mystery,
+          but each line should still explain behavior, state, or intent without
+          adding decorative noise.
         </CursedText>
         <CursedText variant="caption">
-          Caption text — smaller, muted, used for supplementary information and metadata.
+          Caption text is small and restrained, used for secondary details and
+          contextual metadata.
         </CursedText>
-        <CursedText variant="label">LABEL TEXT — UPPERCASE TRACKING</CursedText>
+        <CursedText variant="label">LABEL TEXT - UPPERCASE TRACKING</CursedText>
         <CursedText variant="mono">
-          const ritual = await summon(&#123; theme: &apos;cursed&apos;, energy: &apos;meditative&apos; &#125;);
+          const profile = configureTheme(&#123; theme: &apos;shadow&apos;, mode:
+          &apos;light&apos; &#125;);
         </CursedText>
       </div>
 
@@ -48,13 +50,13 @@ function TypographySpecimen() {
           Blur Reveal Entrance
         </CursedHeading>
         <CursedHeading level="h3" animation="shimmer">
-          Shimmer Sigil Effect
+          Luminous Accent (Subtle)
         </CursedHeading>
         <CursedText variant="body" animation="slide-up">
-          Slide-up text rises from the digital void like a summoned entity.
+          Slide-up text should feel like a measured entrance, not spectacle.
         </CursedText>
         <CursedText variant="mono" animation="terminal">
-          channeling signal from /dev/cursed
+          rendering narrative tone from /design/context
         </CursedText>
       </div>
     </div>

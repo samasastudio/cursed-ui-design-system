@@ -101,9 +101,9 @@ export const PresetMist: StoryObj = {
    ----------------------------------------------------------------------- */
 
 export const ShrineSunsetRitual: StoryObj = {
-  name: "Shrine / Sunset Ritual",
+  name: "Shrine / Balanced",
   render: () => (
-    <GradientStage label="Shrine — Sunset Ritual">
+    <GradientStage label="Shrine — balanced profile">
       <AnimatedGradient
         config={{
           preset: "custom",
@@ -128,9 +128,9 @@ export const ShrineSunsetRitual: StoryObj = {
 };
 
 export const ShadowNeonGrimoire: StoryObj = {
-  name: "Shadow / Neon Grimoire",
+  name: "Shadow / High Contrast",
   render: () => (
-    <GradientStage label="Shadow — Neon Grimoire">
+    <GradientStage label="Shadow — high contrast profile">
       <AnimatedGradient
         config={{
           preset: "custom",
@@ -155,9 +155,9 @@ export const ShadowNeonGrimoire: StoryObj = {
 };
 
 export const VoidCosmicPulse: StoryObj = {
-  name: "Void / Cosmic Pulse",
+  name: "Void / Luminous",
   render: () => (
-    <GradientStage label="Void — Cosmic Pulse">
+    <GradientStage label="Void — luminous profile">
       <AnimatedGradient
         config={{
           preset: "custom",
@@ -201,7 +201,7 @@ export const WithHeavyNoise: StoryObj = {
    All three themes side by side
    ----------------------------------------------------------------------- */
 
-function ThemeTriptych() {
+function ThemeTriptychView() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-0">
       <div className="relative overflow-hidden" style={{ height: 500 }}>
@@ -238,7 +238,7 @@ function ThemeTriptych() {
               color: "#8a8d96",
             }}
           >
-            Sunset Ritual
+            balanced
           </span>
         </div>
       </div>
@@ -273,11 +273,11 @@ function ThemeTriptych() {
           <span
             className="text-xs mt-2 tracking-widest uppercase"
             style={{
-              fontFamily: "'Aoboshi One', serif",
+              fontFamily: "'Manrope', sans-serif",
               color: "#8a8a88",
             }}
           >
-            Neon Grimoire
+            high contrast
           </span>
         </div>
       </div>
@@ -319,7 +319,7 @@ function ThemeTriptych() {
               color: "#7a7a82",
             }}
           >
-            Cosmic Pulse
+            luminous
           </span>
         </div>
       </div>
@@ -327,7 +327,7 @@ function ThemeTriptych() {
   );
 }
 
-export const ThemeTriptych_: StoryObj = {
+export const ThemeTriptych: StoryObj = {
   name: "Theme Triptych",
-  render: () => <ThemeTriptych />,
+  render: () => <ThemeTriptychView />,
 };
