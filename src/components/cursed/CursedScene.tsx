@@ -137,6 +137,9 @@ export function CursedScene({
     ref,
     () => ({
       play: () => {
+        // Reduced motion is a hard contract: poster only, no escape hatch —
+        // not even via the imperative handle.
+        if (prefersReducedMotion) return;
         userPausedRef.current = false;
         videoRef.current?.play().catch(() => {});
       },
@@ -147,7 +150,7 @@ export function CursedScene({
         return videoRef.current;
       },
     }),
-    []
+    [prefersReducedMotion]
   );
 
   // Keep the visible play/pause icon in sync with the underlying element.
@@ -227,13 +230,21 @@ export function CursedScene({
     const video = videoRef.current;
     if (!video) return;
     if (video.paused) {
+      // Reduced motion is a hard contract: poster only, no escape hatch.
+      // Manual play clicks are also blocked while the user prefers reduced
+      // motion. The button still toggles the sticky-pause flag so behavior
+      // resumes naturally if the preference changes later.
+      if (prefersReducedMotion) {
+        userPausedRef.current = false;
+        return;
+      }
       userPausedRef.current = false;
       video.play().catch(() => {});
     } else {
       userPausedRef.current = true;
       video.pause();
     }
-  }, []);
+  }, [prefersReducedMotion]);
 
   const hoverHandlers =
     playOn === "hover"
