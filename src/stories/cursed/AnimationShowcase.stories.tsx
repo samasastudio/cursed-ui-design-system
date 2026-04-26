@@ -4,6 +4,12 @@ import { CursedHeading } from "@/components/cursed/CursedHeading";
 import { CursedText } from "@/components/cursed/CursedText";
 import { CursedBackground } from "@/components/cursed/CursedBackground";
 import { CursedButton } from "@/components/cursed/CursedButton";
+import { CursedScene } from "@/components/cursed/CursedScene";
+
+const SHOWCASE_SCENE_SRC =
+  "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4";
+const SHOWCASE_SCENE_POSTER =
+  "https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg";
 
 const meta: Meta = {
   title: "Cursed UI/Animation Showcase",
@@ -76,6 +82,34 @@ function MinimalScene() {
   );
 }
 
+function VideoScene() {
+  return (
+    <div className="bg-[var(--cursed-bg)] px-12 py-16">
+      <div className="mx-auto grid max-w-5xl gap-10 md:grid-cols-2 md:items-center">
+        <div className="space-y-6">
+          <CursedHeading level="h2" animation="blur-reveal">
+            Scene Windows
+          </CursedHeading>
+          <CursedText variant="body">
+            Small looping clips, visibility-gated and reduced-motion aware.
+            Frame, tint, and play-trigger all swap via props so the same
+            component can serve as an ambient tile or a hover-reveal moment.
+          </CursedText>
+          <CursedText variant="mono" animation="terminal">
+            variant=framed · tint=subtle · playOn=visible
+          </CursedText>
+        </div>
+        <CursedScene
+          src={SHOWCASE_SCENE_SRC}
+          poster={SHOWCASE_SCENE_POSTER}
+          variant="framed"
+          tint="subtle"
+        />
+      </div>
+    </div>
+  );
+}
+
 function FullShowcaseView() {
   return (
     <div className="bg-[var(--cursed-bg)]">
@@ -84,6 +118,8 @@ function FullShowcaseView() {
       <OrbScene />
       <div className="h-px bg-[var(--cursed-border)]" />
       <MinimalScene />
+      <div className="h-px bg-[var(--cursed-border)]" />
+      <VideoScene />
     </div>
   );
 }
@@ -98,6 +134,11 @@ export const FloatingOrbs: StoryObj = {
 
 export const MinimalGrid: StoryObj = {
   render: () => <MinimalScene />,
+};
+
+export const VideoSceneWindow: StoryObj = {
+  name: "Scene Window",
+  render: () => <VideoScene />,
 };
 
 export const FullShowcase: StoryObj = {

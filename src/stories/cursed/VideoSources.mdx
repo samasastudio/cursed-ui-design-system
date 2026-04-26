@@ -1,0 +1,269 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Cursed UI/Video Sources" />
+
+# Loading video into `CursedScene`
+
+`CursedScene` is **source-agnostic**. It does not bundle, transcode, or proxy
+video — it hands a URL (or a list of URLs) to a `<video>` element and lets the
+browser do the rest. That means everything in this guide is really about how
+your **video host** behaves; the component layer is already correct.
+
+This page covers:
+
+1. The minimum that works
+2. Local clips in `public/scenes/` (the dev default)
+3. Hosting on a CDN (the production path)
+4. Multi-codec delivery via the `sources` prop
+5. CDN response checklist (headers, encoding, CORS)
+6. Hosting options, ranked
+7. Keeping CDN URLs out of component code
+8. Signed / private URLs
+9. Why `CursedScene` does not support HLS / DASH
+10. Troubleshooting matrix
+
+---
+
+## 1. The minimum that works
+
+```tsx
+<CursedScene
+  src="https://cdn.example.com/scenes/sakura.mp4"
+  poster="https://cdn.example.com/scenes/sakura.jpg"
+/>
+```
+
+Same-origin, cross-origin, signed URL, data URI — `CursedScene` doesn't care.
+If a `<video>` element can play it, the component can render it.
+
+---
+
+## 2. Local clips in `public/scenes/`
+
+For local development and Storybook, drop files under `public/scenes/` and
+reference them by absolute path:
+
+```tsx
+<CursedScene src="/scenes/sakura.mp4" poster="/scenes/sakura.jpg" />
+```
+
+Vite serves `public/` at the site root, so `/scenes/sakura.mp4` resolves to
+`public/scenes/sakura.mp4`. See `public/scenes/README.md` for the encoding
+spec (≤500 KB, ~3 s, H.264 + `+faststart`, silent, loop-clean).
+
+The Storybook stories in `Cursed UI/Scene` currently point at MDN's CC0
+`flower.mp4` so the gallery works out of the box. Swap the `DEMO_SRC` /
+`DEMO_POSTER` constants in `src/stories/cursed/Scene.stories.tsx` once you
+have local assets.
+
+---
+
+## 3. Hosting on a CDN
+
+Production sites should serve clips from a CDN, not from the same origin as
+your app code. Reasons:
+
+- Edge-cached bytes are dramatically faster than origin fetches.
+- Video traffic is the bulk of `CursedScene`'s payload — keep it off your
+  app's bandwidth budget.
+- A separate CDN means you can rotate clips without redeploying the app.
+
+Pass the CDN URL exactly as you would a local one:
+
+```tsx
+<CursedScene
+  src="https://scenes.cdn.example.com/sakura.mp4"
+  poster="https://scenes.cdn.example.com/sakura.jpg"
+/>
+```
+
+The interaction with the component's defaults is important:
+
+- `preload="none"` (the default) means the CDN sees **zero** requests until
+  the IntersectionObserver decides the scene is visible.
+- When the observer triggers `.play()`, the browser issues a single
+  `Range: bytes=0-` request. With `+faststart` and small clips, the first
+  frame paints almost immediately.
+- When the user scrolls the scene out of view, the video is paused (no more
+  bytes pulled) but already-cached bytes stay in the browser cache for the
+  next time it scrolls back in.
+
+---
+
+## 4. Multi-codec delivery via the `sources` prop
+
+The cleanest way to ship a smaller modern format with a wider-compatibility
+fallback is the `sources` array:
+
+```tsx
+<CursedScene
+  poster="https://cdn.example.com/scenes/sakura.jpg"
+  sources={[
+    {
+      src: "https://cdn.example.com/scenes/sakura.av1.mp4",
+      type: 'video/mp4; codecs="av01.0.05M.08"',
+    },
+    {
+      src: "https://cdn.example.com/scenes/sakura.webm",
+      type: "video/webm",
+    },
+    {
+      src: "https://cdn.example.com/scenes/sakura.mp4",
+      type: "video/mp4",
+    },
+  ]}
+/>
+```
+
+The browser walks the array top-to-bottom, plays the first format it can
+decode, and ignores the rest. AV1 typically saves ~40% bytes vs H.264 at the
+same visual quality — meaningful when six tiles are streaming in a Gallery.
+
+When `sources` is provided, the `src` attribute is suppressed automatically.
+
+### When to use which
+
+| Format         | Use when                                                                  |
+| -------------- | ------------------------------------------------------------------------- |
+| H.264 (`.mp4`) | Universal fallback. Always include.                                       |
+| WebM / VP9     | Wider modern support than AV1, smaller than H.264. Optional middle layer. |
+| AV1 (`.mp4`)   | Best compression. Safari ≥17, Chrome ≥100, Firefox ≥100. Optional.        |
+
+For the kind of ≤500 KB clips this component targets, **H.264 alone is
+totally fine**. Multi-codec is an optimization for sites that ship many
+scenes per page, not a requirement.
+
+---
+
+## 5. CDN response checklist
+
+These are the headers/behaviors your video host must get right or playback
+misbehaves in subtle ways:
+
+| Concern                | What you need                                                 | Why                                                                                                                                                                                                                                                    |
+| ---------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `Content-Type`         | Set to `video/mp4`, `video/webm`, etc. — never `octet-stream` | Some CDNs default to `application/octet-stream` for unknown extensions; `<video>` will refuse to play those.                                                                                                                                           |
+| `Accept-Ranges: bytes` | 206 Partial Content responses to `Range:` requests            | Browsers issue range requests so they can start playback before the full file downloads. No range support → playback stalls until the entire file arrives.                                                                                             |
+| `+faststart` (encoder) | Set at encode time, not on the CDN                            | Moves the MP4 `moov` atom to the front of the file. Without it, the browser must download the full file before rendering the first frame. The `ffmpeg` recipe in `public/scenes/README.md` does this.                                                  |
+| `Cache-Control`        | `public, max-age=31536000, immutable` for hashed filenames    | Clips are static assets; cache forever at the edge and in the browser. Bust by renaming (`sakura.abc123.mp4`).                                                                                                                                         |
+| HTTPS                  | Required if your site is HTTPS                                | Mixed-content blocks `http://` video on HTTPS pages.                                                                                                                                                                                                   |
+| CORS                   | **Not needed** for plain playback                             | `CursedScene` does not set `crossOrigin` on the `<video>` element. Plain playback works without any `Access-Control-Allow-Origin` headers. CORS is only needed if you read pixels to canvas, attach `<track>` captions, or set `crossOrigin` yourself. |
+
+### Quick verification
+
+```bash
+curl -I https://scenes.cdn.example.com/sakura.mp4
+```
+
+Look for `Content-Type: video/mp4`, `Accept-Ranges: bytes`, and a sane
+`Cache-Control`. If `Accept-Ranges` is missing or says `none`, fix the CDN
+config before doing anything else — that one issue causes the most
+"playback hangs forever" reports.
+
+---
+
+## 6. Hosting options, ranked
+
+In rough "least to most setup" order:
+
+| Host                    | Egress cost               | Notes                                                                                                                                                           |
+| ----------------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Vercel Blob**         | Included up to a quota    | `put('scenes/sakura.mp4', file, { access: 'public' })` returns a CDN URL with all required headers baked in. Best fit on Vercel.                                |
+| **Cloudflare R2**       | Free                      | S3-compatible, free egress. Pair with a public bucket and set `Cache-Control` at upload. Excellent price/performance.                                           |
+| **Bunny.net**           | Cheap                     | Pull-zone in front of any origin; sane defaults for video.                                                                                                      |
+| **AWS S3 + CloudFront** | Standard AWS rates        | The classic. Ensure CloudFront forwards `Range` requests and S3 objects have correct `Content-Type`.                                                            |
+| **Cloudinary**          | Tiered                    | Heavier, but on-the-fly transcoding (one upload → AV1/WebM/H.264 URLs). Worth it if you source many random Pexels clips and don't want to hand-encode each one. |
+| **Mux**                 | Adaptive-streaming priced | Overkill for ≤500 KB scenic loops. Mux is for adaptive HLS of long-form video. Don't reach for it for this use case.                                            |
+
+---
+
+## 7. Keeping CDN URLs out of component code
+
+Hardcoded CDN URLs in stories or pages get stale fast. A small helper keeps
+the boundary clean:
+
+```ts
+// src/lib/scenes.ts
+const CDN_BASE = import.meta.env.VITE_SCENES_CDN ?? "/scenes";
+
+export const sceneSrc = (name: string) => `${CDN_BASE}/${name}.mp4`;
+export const scenePoster = (name: string) => `${CDN_BASE}/${name}.jpg`;
+```
+
+Then anywhere you render a scene:
+
+```tsx
+<CursedScene src={sceneSrc("sakura")} poster={scenePoster("sakura")} />
+```
+
+- **Local dev** — `VITE_SCENES_CDN` is unset → falls back to `/scenes/...`,
+  resolving against `public/`.
+- **Production** — set `VITE_SCENES_CDN=https://scenes.cdn.example.com` in
+  the deploy environment, rebuild, every scene now points at the CDN. No
+  component changes, no hunting for hardcoded URLs.
+
+For multi-codec delivery, extend the helper to return a `sources[]` array
+with `.av1.mp4`, `.webm`, and `.mp4` siblings.
+
+---
+
+## 8. Signed / private URLs
+
+If your scenes are gated (premium content, internal tooling), generate a
+pre-signed URL on the server and pass it as `src`. The component is stateless
+with respect to auth — it has no opinion about how the URL was minted.
+
+Two practical gotchas:
+
+- **Signed URLs expire.** If a `CursedScene` mounts after expiry, the GET
+  fails and the poster remains visible indefinitely. That's reasonable
+  graceful degradation, but if your sessions are long-lived, refresh strategy
+  is your problem, not the component's.
+- **Don't bake signed URLs into static HTML.** Render them at request time
+  (server component, edge function, route handler) so they're fresh. Static
+  HTML cached at a CDN with a 1-hour signed URL inside it is a recipe for
+  mysterious breakage 60 minutes after deploy.
+
+---
+
+## 9. Why `CursedScene` does not support HLS / DASH
+
+Adaptive bitrate streaming (HLS, DASH) is great for long-form video where
+bandwidth conditions can shift mid-playback. It is the wrong tool for this
+component:
+
+- `<video>` plays HLS natively only in Safari. Chrome, Firefox, and Edge
+  require a JS shim (`hls.js`, `dash.js`) that adds ~70 KB minified to your
+  bundle.
+- `CursedScene` was designed for clips ≤500 KB, ~3 s, looping. There is no
+  mid-playback bandwidth adaptation to do.
+- Manifest fetch + segment fetches add round-trips that progressive MP4
+  doesn't have, so first-frame time is actually worse, not better.
+
+If you need adaptive streaming for a different use case, build a separate
+component (`<CursedStream>`?) — don't bolt it onto `CursedScene`.
+
+---
+
+## 10. Troubleshooting matrix
+
+| Symptom                                                      | Likely cause                                                       | Fix                                                                                              |
+| ------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| Video flashes background color before first frame            | Missing `poster` AND `preload="none"`                              | Add a `poster` URL, or set `preload="metadata"`. The component logs a dev-only warning for this. |
+| Playback hangs partway through                               | CDN does not honor `Range:` requests                               | Verify `Accept-Ranges: bytes` and 206 responses for partial requests.                            |
+| First frame takes seconds to appear after `.play()`          | MP4 was encoded without `+faststart`                               | Re-encode with `ffmpeg -movflags +faststart`. See `public/scenes/README.md`.                     |
+| Browser refuses to play, console says "format not supported" | `Content-Type` is `application/octet-stream` or wrong codec string | Set explicit `Content-Type` on the CDN; verify the codec parameter on the `sources[].type`.      |
+| `Mixed Content` warning blocks video on HTTPS site           | `src` is `http://`                                                 | Use HTTPS URLs. All major CDNs serve HTTPS by default.                                           |
+| Scene stays paused even when scrolled into view              | User clicked the pause button — sticky pause is intentional        | Click play to resume. (See the component's reduced-motion / sticky-pause section.)               |
+| Many scenes hammer the CDN on initial page load              | `playOn="always"` or `preload="auto"` set                          | Use the defaults (`playOn="visible"`, `preload="none"`). The IntersectionObserver does the work. |
+| Scene plays but no theme tint applied                        | Theme CSS variables not set on a parent                            | Ensure a `data-theme` attribute is set on `<html>` or an ancestor. See `AGENTS.md` theme system. |
+
+---
+
+## Bottom line
+
+`CursedScene` will render anything `<video>` can play. The work — and the
+fun — is on the CDN side: serve the right `Content-Type`, support range
+requests, encode with `+faststart`, cache forever, and keep URLs behind a
+small env-driven helper so production swaps are one variable away. The
+component layer needs no changes.
