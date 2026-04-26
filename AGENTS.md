@@ -18,6 +18,7 @@ src/
 │   │   ├── CursedButton.tsx   # Primary/Secondary/Ghost/Destructive (wraps FlowButton)
 │   │   ├── CursedInput.tsx    # Input, Textarea, Select, Checkbox
 │   │   ├── CursedBackground.tsx # Gradient (WebGL), Orbs (CSS), Minimal (dot grid)
+│   │   ├── CursedScene.tsx     # Themed <video> tile, IO-gated, reduced-motion aware
 │   │   └── index.ts           # Barrel export
 │   ├── ui/                    # shadcn primitives (button, input, select, textarea)
 │   ├── animated-gradient.tsx  # Spell UI — WebGL2 shader gradient
@@ -120,6 +121,25 @@ To use a Cursed UI theme outside this repo:
 4. Install Spell UI and shadcn dependencies as needed (`motion`, `three`, `@radix-ui/react-slot`, etc.).
 
 The token names are stable. Build your components against `--cursed-*` variables and they will respond to theme changes automatically.
+
+## Video / `CursedScene` Sourcing
+
+`CursedScene` is source-agnostic — it accepts any URL the browser can play.
+Two delivery paths are documented:
+
+- **Local placeholder clips** — `public/scenes/` directory. See
+  `public/scenes/README.md` for the encoding spec (≤500 KB, ~3 s, H.264 with
+  `+faststart`, silent, loop-clean) and CC0 sourcing notes.
+- **Production CDN delivery** — full guide at the Storybook docs page
+  **Cursed UI → Video Sources** (`src/stories/cursed/VideoSources.mdx`).
+  Covers required CDN response headers (`Content-Type`, `Accept-Ranges`,
+  `Cache-Control`), the `sources[]` multi-codec prop, hosting comparisons
+  (Vercel Blob / R2 / Bunny / S3+CloudFront / Cloudinary / Mux), an
+  env-driven `sceneSrc()` helper pattern, signed-URL gotchas, and a
+  troubleshooting matrix.
+
+`CursedScene` itself does **not** support HLS / DASH adaptive streaming —
+that would need a separate component. See the docs page for rationale.
 
 ## WebGL Notes
 
