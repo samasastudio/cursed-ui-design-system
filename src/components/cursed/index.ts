@@ -10,3 +10,13 @@ export {
 export { CursedBackground } from "./CursedBackground";
 export { CursedScene } from "./CursedScene";
 export type { CursedSceneProps, CursedSceneHandle } from "./CursedScene";
+export { CursedBrailleCard } from "./CursedBrailleCard";
+export type {
+  CursedBrailleCardProps,
+  CursedBrailleCardHandle,
+  CursedBrailleCardMode,
+  CursedBrailleCardVariant,
+  CursedBrailleCardTint,
+  CursedBrailleCardPlayOn,
+  CursedBrailleCardColorFill,
+} from "./CursedBrailleCard";
